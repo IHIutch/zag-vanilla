@@ -1,16 +1,12 @@
-import * as accordion from "@zag-js/accordion"
-import { createNormalizer } from "@zag-js/types"
-import { bindAll } from "bind-event-listener"
+import * as accordion from '@zag-js/accordion';
+import { createNormalizer } from '@zag-js/types';
+import { nanoid } from 'nanoid';
+import invariant from 'tiny-invariant';
 
-
-import { nanoid } from "nanoid"
-import invariant from "tiny-invariant"
-
-
-const ACCORDION_ROOT_SELECTOR = '[data-part="accordion-root"]'
-const ACCORDION_ITEM_SELECTOR = '[data-part="accordion-item"]'
-const ACCORDION_TRIGGER_SELECTOR = '[data-part="accordion-trigger"]'
-const ACCORDION_CONTENT_SELECTOR = '[data-part="accordion-content"]'
+const ACCORDION_ROOT_SELECTOR = '[data-part="accordion-root"]';
+const ACCORDION_ITEM_SELECTOR = '[data-part="accordion-item"]';
+const ACCORDION_TRIGGER_SELECTOR = '[data-part="accordion-trigger"]';
+const ACCORDION_CONTENT_SELECTOR = '[data-part="accordion-content"]';
 
 interface AttrMap {
   [key: string]: string;
@@ -20,32 +16,32 @@ interface Attrs {
   [key: string]: any; // Change 'any' to the specific type you want to allow for attributes
 }
 
-const map: AttrMap = {
-  Focus: "Focusin",
-  Blur: "Focusout",
-  Change: "Input",
-  DoubleClick: "Dblclick",
-  htmlFor: "for",
-  className: "class",
-  defaultValue: "value",
-  defaultChecked: "checked",
+const propMap: AttrMap = {
+  Focus: 'Focusin',
+  Blur: 'Focusout',
+  Change: 'Input',
+  DoubleClick: 'Dblclick',
+  htmlFor: 'for',
+  className: 'class',
+  defaultValue: 'value',
+  defaultChecked: 'checked',
 };
 
 export function attrs(node: HTMLElement, attrs: Attrs): () => void {
   const attrKeys = Object.keys(attrs);
 
   const addEvt = (e: string, f: EventListener) => {
-    e = map[e] ?? e;
+    e = propMap[e] ?? e;
     node.addEventListener(e.toLowerCase(), f);
   };
 
   const remEvt = (e: string, f: EventListener) => {
-    e = map[e] ?? e;
+    e = propMap[e] ?? e;
     node.removeEventListener(e.toLowerCase(), f);
   };
 
-  const onEvents = (attr: string) => attr.startsWith("on");
-  const others = (attr: string) => !attr.startsWith("on");
+  const onEvents = (attr: string) => attr.startsWith('on');
+  const others = (attr: string) => !attr.startsWith('on');
 
   const setup = (attr: string) => addEvt(attr.substring(2), attrs[attr]);
   const teardown = (attr: string) => remEvt(attr.substring(2), attrs[attr]);
@@ -53,12 +49,12 @@ export function attrs(node: HTMLElement, attrs: Attrs): () => void {
   const apply = (attrName: string) => {
     let value = attrs[attrName];
 
-    if (typeof value === "boolean") {
+    if (typeof value === 'boolean') {
       value = value || undefined;
     }
 
     if (value != null) {
-      if (["value", "checked", "htmlFor"].includes(attrName)) {
+      if (['value', 'checked', 'htmlFor'].includes(attrName)) {
         (node as any)[attrName] = value; // Using 'any' here because TypeScript can't narrow the type based on the array check
       } else {
         node.setAttribute(attrName.toLowerCase(), value);
@@ -77,122 +73,97 @@ export function attrs(node: HTMLElement, attrs: Attrs): () => void {
   };
 }
 
-
-
-const propMap: any = {
-  htmlFor: "for",
-  className: "class",
-  onDoubleClick: "onDblclick",
-  // onChange: "onInput",
-  // onFocus: "onFocusin",
-  // onBlur: "onFocusout",
-  defaultValue: "value",
-  defaultChecked: "checked",
-}
-
 const toStyleString = (style: any) => {
-  let string = ""
+  let string = '';
   for (let key in style) {
-    const value = style[key]
-    if (value === null || value === undefined) continue
-    if (!key.startsWith("--")) key = key.replace(/[A-Z]/g, (match) => `-${match.toLowerCase()}`)
-    string += `${key}:${value};`
+    const value = style[key];
+    if (value === null || value === undefined) continue;
+    if (!key.startsWith('--'))
+      key = key.replace(/[A-Z]/g, (match) => `-${match.toLowerCase()}`);
+    string += `${key}:${value};`;
   }
-  return string
-}
-
+  return string;
+};
 
 const normalizeProps = createNormalizer((props: any) => {
-
   return Object.entries(props).reduce<any>((acc, [key, value]) => {
-    if (value === undefined) return acc
+    if (value === undefined) return acc;
 
     if (key in propMap) {
-      key = propMap[key]
+      key = propMap[key];
     }
 
-    if (key === "style" && typeof value === "object") {
-      acc.style = toStyleString(value)
-      return acc
+    if (key === 'style' && typeof value === 'object') {
+      acc.style = toStyleString(value);
+      return acc;
     }
 
-    acc[key.toLowerCase()] = value
+    acc[key.toLowerCase()] = value;
 
-    return acc
-  }, {})
-})
+    return acc;
+  }, {});
+});
 
-
-function initializeAccordion(ACCORDION_ROOT: HTMLElement) {
-
-  const getApi = () => accordion.connect(service.state, service.send, normalizeProps)
-
-  const accordionItems = Array.from(ACCORDION_ROOT.querySelectorAll<HTMLElement>(
-    ACCORDION_ITEM_SELECTOR
-  ))
+function init(rootEl: HTMLElement) {
+  const accordionItems = Array.from(
+    rootEl.querySelectorAll<HTMLElement>(ACCORDION_ITEM_SELECTOR)
+  );
 
   const service = accordion.machine({
     id: nanoid(),
-    multiple: ACCORDION_ROOT.hasAttribute('data-multiple'),
-    collapsible: true
-  })
+    multiple: rootEl.hasAttribute('data-multiple'),
+    collapsible: true,
+  });
 
-  attrs(ACCORDION_ROOT, getApi().rootProps)
+  Array.from(accordionItems).forEach((itemEl) => {
+    const itemId = nanoid();
 
-  Array.from(accordionItems).forEach((ACCORDION_ITEM) => {
-    const itemId = nanoid()
-
-    const ACCORDION_TRIGGER = ACCORDION_ITEM.querySelector<HTMLButtonElement>(
+    const triggerEl = itemEl.querySelector<HTMLButtonElement>(
       ACCORDION_TRIGGER_SELECTOR
     );
-    const ACCORDION_CONTENT = ACCORDION_ITEM.querySelector<HTMLElement>(
+    const contentEl = itemEl.querySelector<HTMLElement>(
       ACCORDION_CONTENT_SELECTOR
     );
 
-    invariant(ACCORDION_TRIGGER instanceof HTMLButtonElement, 'Expected ACCORDION_TRIGGER to be defined');
-    invariant(ACCORDION_CONTENT instanceof HTMLElement, 'Expected ACCORDION_CONTENT to be defined');
+    let prev: () => void;
+    function render(api: accordion.Api) {
+      invariant(
+        triggerEl instanceof HTMLButtonElement,
+        'Expected triggerEl to be defined'
+      );
+      invariant(
+        contentEl instanceof HTMLElement,
+        'Expected contentEl to be defined'
+      );
 
-    const { onclick, onfocus, onblur, onkeydown } = getApi().getItemTriggerProps({ value: itemId })
-
-    bindAll(ACCORDION_TRIGGER, [
-      {
-        type: 'click',
-        listener: onclick
-      },
-      {
-        type: 'focusin',
-        listener: onfocus
-      },
-      {
-        type: 'focusout',
-        listener: onblur
-      },
-      {
-        type: 'keydown',
-        listener: onkeydown
-      }
-    ])
-
+      if (prev) prev();
+      let cleanups = [
+        attrs(itemEl, api.getItemProps({ value: itemId })),
+        attrs(triggerEl, api.getItemTriggerProps({ value: itemId })),
+        attrs(contentEl, api.getItemContentProps({ value: itemId })),
+      ];
+      prev = () => {
+        cleanups.forEach((fn) => fn());
+      };
+    }
 
     service.subscribe(() => {
-      const { onclick, onfocus, onblur, onkeydown, ...triggerProps } = getApi().getItemTriggerProps({ value: itemId })
-      const itemProps = getApi().getItemProps({ value: itemId })
-      const contentProps = getApi().getItemContentProps({ value: itemId })
+      const api = accordion.connect(
+        service.state,
+        service.send,
+        normalizeProps
+      );
+      render(api);
+    });
+  });
 
-      attrs(ACCORDION_ITEM, itemProps)
-      attrs(ACCORDION_TRIGGER, triggerProps)
-      attrs(ACCORDION_CONTENT, contentProps)
-    })
-  })
-
-  service.start()
-
+  service.start();
 }
 
 export function accordionZag() {
-  Array.from(document.querySelectorAll<HTMLElement>(
-    ACCORDION_ROOT_SELECTOR
-  )).forEach((rootEl) => {
-    initializeAccordion(rootEl)
+  Array.from(
+    document.querySelectorAll<HTMLElement>(ACCORDION_ROOT_SELECTOR)
+  ).forEach((rootEl) => {
+    init(rootEl);
   });
 }
