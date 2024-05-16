@@ -8,43 +8,37 @@ const ACCORDION_ITEM_SELECTOR = '[data-part="accordion-item"]';
 const ACCORDION_TRIGGER_SELECTOR = '[data-part="accordion-trigger"]';
 const ACCORDION_CONTENT_SELECTOR = '[data-part="accordion-content"]';
 
-function init(rootEl: HTMLElement) {
+function init(accordionRootEl: HTMLElement) {
   const accordionItems = Array.from(
-    rootEl.querySelectorAll<HTMLElement>(ACCORDION_ITEM_SELECTOR)
+    accordionRootEl.querySelectorAll<HTMLElement>(ACCORDION_ITEM_SELECTOR)
   );
 
   const service = accordion.machine({
     id: nanoid(),
-    multiple: rootEl.hasAttribute('data-multiple'),
+    multiple: accordionRootEl.hasAttribute('data-multiple'),
     collapsible: true,
   });
 
-  Array.from(accordionItems).forEach((itemEl) => {
+  accordionItems.forEach((itemEl) => {
     const itemId = nanoid();
 
-    const triggerEl = itemEl.querySelector<HTMLButtonElement>(
+    const accordionTriggerEl = itemEl.querySelector<HTMLButtonElement>(
       ACCORDION_TRIGGER_SELECTOR
     );
-    const contentEl = itemEl.querySelector<HTMLElement>(
+    const accordionContentEl = itemEl.querySelector<HTMLElement>(
       ACCORDION_CONTENT_SELECTOR
     );
 
     let prev: () => void;
     function render(api: accordion.Api) {
-      invariant(
-        triggerEl instanceof HTMLButtonElement,
-        'Expected triggerEl to be defined'
-      );
-      invariant(
-        contentEl instanceof HTMLElement,
-        'Expected contentEl to be defined'
-      );
+      invariant(accordionTriggerEl, `Cannot find trigger element with attribute: ${ACCORDION_TRIGGER_SELECTOR}`);
+      invariant(accordionContentEl, `Cannot find content element with attribute: ${ACCORDION_CONTENT_SELECTOR}`);
 
       if (prev) prev();
       let cleanups = [
         attrs(itemEl, api.getItemProps({ value: itemId })),
-        attrs(triggerEl, api.getItemTriggerProps({ value: itemId })),
-        attrs(contentEl, api.getItemContentProps({ value: itemId })),
+        attrs(accordionTriggerEl, api.getItemTriggerProps({ value: itemId })),
+        attrs(accordionContentEl, api.getItemContentProps({ value: itemId })),
       ];
       prev = () => {
         cleanups.forEach((fn) => fn());
@@ -67,7 +61,5 @@ function init(rootEl: HTMLElement) {
 export function initAccordion() {
   Array.from(
     document.querySelectorAll<HTMLElement>(ACCORDION_ROOT_SELECTOR)
-  ).forEach((rootEl) => {
-    init(rootEl);
-  });
+  ).forEach(init);
 }
