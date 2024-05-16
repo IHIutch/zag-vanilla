@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8"/>
+		<link rel="icon" type="image/svg+xml" href="/vite.svg"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<title>Vite + TS</title>
+	</head>
+	<body>
+		<div>
+
+			<p>Multiple open</p>
+
+			<div data-part="accordion-root" data-multiple>
+
+				<div data-part="accordion-item">
+					<button data-part="accordion-trigger">Toggle</button>
+					<div data-part="accordion-content">hello</div>
+				</div>
+
+				<div data-part="accordion-item">
+					<button data-part="accordion-trigger">Toggle 2</button>
+					<div data-part="accordion-content">hello 2</div>
+				</div>
+
+				<div data-part="accordion-item">
+					<button data-part="accordion-trigger">Toggle 3</button>
+					<div data-part="accordion-content">hello 3</div>
+				</div>
+
+			</div>
+
+			<hr>
+
+			<p>Single open</p>
+
+			<div data-part="accordion-root">
+
+				<div data-part="accordion-item">
+					<button data-part="accordion-trigger">Toggle</button>
+					<div data-part="accordion-content">hello</div>
+				</div>
+
+				<div data-part="accordion-item">
+					<button data-part="accordion-trigger">Toggle 2</button>
+					<div data-part="accordion-content">hello 2</div>
+				</div>
+
+				<div data-part="accordion-item">
+					<button data-part="accordion-trigger">Toggle 3</button>
+					<div data-part="accordion-content">hello 3</div>
+				</div>
+
+			</div>
+
+		</div>
+		<script type="module" src="/src/main.ts"></script>
+	</body>
+</html>
