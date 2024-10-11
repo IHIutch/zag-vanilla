@@ -1,66 +1,37 @@
-import * as accordion from '@zag-js/accordion';
-import { nanoid } from 'nanoid';
-import invariant from 'tiny-invariant';
-import { attrs, normalizeProps } from './utils';
+import * as accordion from "@zag-js/accordion"
+import { normalizeProps } from "./normalize-props"
+import { spreadProps } from "./spread-props"
+import { Component } from "./component"
 
-const ACCORDION_ROOT_SELECTOR = '[data-part="accordion-root"]';
-const ACCORDION_ITEM_SELECTOR = '[data-part="accordion-item"]';
-const ACCORDION_TRIGGER_SELECTOR = '[data-part="accordion-trigger"]';
-const ACCORDION_CONTENT_SELECTOR = '[data-part="accordion-content"]';
+export class Accordion extends Component<accordion.Context, accordion.Api> {
+  initService(context: accordion.Context) {
+    return accordion.machine(context)
+  }
 
-function init(accordionRootEl: HTMLElement) {
-  const accordionItems = Array.from(
-    accordionRootEl.querySelectorAll<HTMLElement>(ACCORDION_ITEM_SELECTOR)
-  );
+  initApi() {
+    return accordion.connect(this.service.state, this.service.send, normalizeProps)
+  }
 
-  const service = accordion.machine({
-    id: nanoid(),
-    multiple: accordionRootEl.hasAttribute('data-multiple'),
-    collapsible: true,
-  });
+  render = () => {
+    spreadProps(this.rootEl, this.api.getRootProps())
+    this.items.forEach((itemEl) => {
+      this.renderItem(itemEl)
+    })
+  }
 
-  accordionItems.forEach((itemEl) => {
-    const itemId = nanoid();
+  private get items() {
+    return Array.from(this.rootEl!.querySelectorAll<HTMLElement>('[data-part="accordion-item"]'))
+  }
 
-    const accordionTriggerEl = itemEl.querySelector<HTMLButtonElement>(
-      ACCORDION_TRIGGER_SELECTOR
-    );
-    const accordionContentEl = itemEl.querySelector<HTMLElement>(
-      ACCORDION_CONTENT_SELECTOR
-    );
-
-    let prev: () => void;
-    function render(api: accordion.Api) {
-      invariant(accordionTriggerEl, `Cannot find trigger element with attribute: ${ACCORDION_TRIGGER_SELECTOR}`);
-      invariant(accordionContentEl, `Cannot find content element with attribute: ${ACCORDION_CONTENT_SELECTOR}`);
-
-      if (prev) prev();
-      let cleanups = [
-        attrs(itemEl, api.getItemProps({ value: itemId })),
-        attrs(accordionTriggerEl, api.getItemTriggerProps({ value: itemId })),
-        attrs(accordionContentEl, api.getItemContentProps({ value: itemId })),
-      ];
-      prev = () => {
-        cleanups.forEach((fn) => fn());
-      };
-    }
-
-    service.subscribe(() => {
-      const api = accordion.connect(
-        service.state,
-        service.send,
-        normalizeProps
-      );
-      render(api);
-    });
-  });
-
-  service._created()
-  service.start()
-}
-
-export function initAccordion() {
-  Array.from(
-    document.querySelectorAll<HTMLElement>(ACCORDION_ROOT_SELECTOR)
-  ).forEach(init);
+  private renderItem = (itemEl: HTMLElement) => {
+    const value = itemEl.dataset.value
+    if (!value) throw new Error("Expected value to be defined")
+    const itemTriggerEl = itemEl.querySelector<HTMLButtonElement>('[data-part="accordion-trigger"]')
+    const itemContentEl = itemEl.querySelector<HTMLElement>('[data-part="accordion-content"]')
+    if (!itemTriggerEl) throw new Error("Expected triggerEl to be defined")
+    if (!itemContentEl) throw new Error("Expected contentEl to be defined")
+    spreadProps(itemEl, this.api.getItemProps({ value }))
+    spreadProps(itemTriggerEl, this.api.getItemTriggerProps({ value }))
+    spreadProps(itemContentEl, this.api.getItemContentProps({ value }))
+  }
 }
