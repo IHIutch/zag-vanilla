@@ -9,10 +9,14 @@ interface Attrs {
 }
 
 const propMap: AttrMap = {
-    Focus: 'Focusin',
-    Blur: 'Focusout',
-    Change: 'Input',
-    DoubleClick: 'Dblclick',
+    // Focus: 'Focusin',
+    // Blur: 'Focusout',
+    // Change: 'Input',
+    // DoubleClick: 'Dblclick',
+    onDoubleClick: "onDblclick",
+    onChange: "onInput",
+    onFocus: "onFocusin",
+    onBlur: "onBlur",
     htmlFor: 'for',
     className: 'class',
     defaultValue: 'value',
@@ -39,6 +43,7 @@ export function attrs(node: HTMLElement, attrs: Attrs): () => void {
     const teardown = (attr: string) => remEvt(attr.substring(2), attrs[attr]);
 
     const apply = (attrName: string) => {
+
         let value = attrs[attrName];
 
         if (typeof value === 'boolean') {
@@ -79,12 +84,6 @@ const toStyleString = (style: any) => {
 
 export const normalizeProps = createNormalizer((props: any) => {
     return Object.entries(props).reduce<any>((acc, [key, value]) => {
-        if (value === undefined) return acc;
-
-        if (key in propMap) {
-            key = propMap[key];
-        }
-
         if (key === 'style' && typeof value === 'object') {
             acc.style = toStyleString(value);
             return acc;

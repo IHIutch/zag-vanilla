@@ -55,7 +55,8 @@ function init(accordionRootEl: HTMLElement) {
     });
   });
 
-  service.start();
+  service._created()
+  service.start()
 }
 
 export function initAccordion() {

@@ -14,6 +14,15 @@ dependencies:
   '@zag-js/core':
     specifier: ^0.50.0
     version: 0.50.0
+  '@zag-js/dom-event':
+    specifier: ^0.50.0
+    version: 0.50.0
+  '@zag-js/dom-query':
+    specifier: ^0.50.0
+    version: 0.50.0
+  '@zag-js/splitter':
+    specifier: ^0.50.0
+    version: 0.50.0
   '@zag-js/types':
     specifier: ^0.50.0
     version: 0.50.0
@@ -423,6 +432,22 @@ packages:
 
   /@zag-js/dom-query@0.50.0:
     resolution: {integrity: sha512-AXTZIpTfCoJZ5+Oj9woSBPKILbrSXpEbXjbBRQ3/JFb+VSbmljNrLpr5OblGEzhVD7enLc+rEmrgGiRC4je6Jg==}
+    dev: false
+
+  /@zag-js/number-utils@0.50.0:
+    resolution: {integrity: sha512-JoRyxl9l5zI34WWq1DTfpI09EIyjADb26zAXAZlGGLtPjp18vBxuz/5Hz0GmmJh3Kk0oKY1wXfesTGxoX5iJbg==}
+    dev: false
+
+  /@zag-js/splitter@0.50.0:
+    resolution: {integrity: sha512-TS7SZiNZ3XX8Pn8QA7d5Dcs/MhHcZ2ulbZgvXS4FbsUSZEwDB7JhnBn6Ou7bZfT1q2d8pYFAEQPefSgMbG9fXw==}
+    dependencies:
+      '@zag-js/anatomy': 0.50.0
+      '@zag-js/core': 0.50.0
+      '@zag-js/dom-event': 0.50.0
+      '@zag-js/dom-query': 0.50.0
+      '@zag-js/number-utils': 0.50.0
+      '@zag-js/types': 0.50.0
+      '@zag-js/utils': 0.50.0
     dev: false
 
   /@zag-js/store@0.50.0:
