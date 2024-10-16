@@ -1,4 +1,5 @@
 import { Accordion } from './accordion.ts'
+import { Checkbox } from './checkbox.ts'
 import { Splitter } from './splitter.ts'
 
 document.querySelectorAll<HTMLElement>('[data-part="accordion-root"]').forEach((rootEl) => {
@@ -15,4 +16,11 @@ document.querySelectorAll<HTMLElement>('[data-part="splitter-root"]').forEach((r
         orientation: rootEl.getAttribute('data-orientation') === 'vertical' ? 'vertical' : 'horizontal'
     })
     splitter.init()
+})
+
+document.querySelectorAll<HTMLElement>('[data-part="checkbox-root"]').forEach((rootEl) => {
+    const checkbox = new Checkbox(rootEl, {
+        id: crypto.randomUUID(),
+    })
+    checkbox.init()
 })

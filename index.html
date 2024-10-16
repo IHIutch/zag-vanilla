@@ -5,6 +5,21 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + TS</title>
+
+    <style>
+      [data-part="checkbox-control"][data-state="unchecked"] {
+        background-color: red;
+      }
+      [data-part="checkbox-control"][data-state="checked"] {
+        background-color: green;
+      }
+      [data-part="checkbox-control"][data-state="indeterminate"] {
+        background-color: blue;
+      }
+      [data-part="checkbox-indicator"][data-state="indeterminate"] {
+        display: none;
+      }
+    </style>
   </head>
   <body>
     <div>
@@ -91,6 +106,32 @@
             <p>B</p>
           </div>
         </div>
+      </div>
+
+      <hr />
+
+      <div>
+        <label data-part="checkbox-root">
+          <span data-part="checkbox-label">Checkbox Input</span>
+          <div data-part="checkbox-control" style="height: 20px; width: 20px">
+            <div
+              data-part="checkbox-indicator"
+              style="height: 16px; width: 16px"
+            >
+              <svg viewBox="0 0 24 24" fill="white">
+                <path
+                  d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z"
+                ></path>
+              </svg>
+            </div>
+          </div>
+          <input
+            type="checkbox"
+            data-part="checkbox-input"
+            indeterminate
+            checked
+          />
+        </label>
       </div>
     </div>
     <script type="module" src="/src/main.ts"></script>
