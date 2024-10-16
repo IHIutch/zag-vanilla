@@ -1,7 +1,7 @@
 import * as splitter from '@zag-js/splitter';
-import { Component } from './component';
-import { spreadProps } from './spread-props';
-import { normalizeProps } from './normalize-props';
+import { Component } from './utils/component';
+import { spreadProps } from './utils/spread-props';
+import { normalizeProps } from './utils/normalize-props';
 
 export class Splitter extends Component<splitter.Context, splitter.Api> {
   initService(context: splitter.Context) {
