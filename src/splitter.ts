@@ -1,17 +1,16 @@
 import * as splitter from '@zag-js/splitter';
-import { normalizeProps } from './utils';
 import { Component } from './component';
 import { spreadProps } from './spread-props';
+import { normalizeProps } from './normalize-props';
 
 export class Splitter extends Component<splitter.Context, splitter.Api> {
   initService(context: splitter.Context) {
     return splitter.machine({
-      id: context.id,
-      orientation: context.orientation,
       size: this.panels.map((panelEl) => ({
         id: panelEl.getAttribute('data-value') || '',
         size: Number(panelEl.getAttribute('data-size') || 50),
-      }))
+      })),
+      ...context,
     })
   }
 
