@@ -1,77 +1,51 @@
 import * as splitter from '@zag-js/splitter';
-import { nanoid } from 'nanoid';
-import invariant from 'tiny-invariant';
-import { attrs, normalizeProps } from './utils';
+import { normalizeProps } from './utils';
+import { Component } from './component';
+import { spreadProps } from './spread-props';
 
-const SPLITTER_ROOT_SELECTOR = '[data-part="splitter-root"]';
-const SPLITTER_PANEL_SELECTOR = '[data-part="splitter-panel"]';
-const SPLITTER_TRIGGER_SELECTOR = '[data-part="splitter-resizer"]';
-
-function init(splitterRootEl: HTMLElement) {
-  const splitterPanels = Array.from(
-    splitterRootEl.querySelectorAll<HTMLElement>(SPLITTER_PANEL_SELECTOR)
-  ).map(splitterEl => {
-    return {
-      el: splitterEl,
-      id: splitterEl.getAttribute('data-value') || '',
-      size: splitterEl.getAttribute('data-size') || 50,
-    }
-  })
-
-  const splitterTriggers = Array.from(
-    splitterRootEl.querySelectorAll<HTMLButtonElement>(
-      SPLITTER_TRIGGER_SELECTOR
-    )).map(triggerEl => {
-      return {
-        el: triggerEl,
-        id: triggerEl.getAttribute('data-value') || '',
-      }
-    });
-
-  const service = splitter.machine({
-    id: nanoid(),
-    size: splitterPanels.map((item) => ({
-      id: item.id,
-      size: Number(item.size),
-    }))
-  });
-
-  let prev: () => void;
-  function render(api: splitter.Api) {
-    splitterTriggers.forEach(item => {
-      return invariant(item, `Cannot find trigger element with attribute: ${SPLITTER_TRIGGER_SELECTOR}`);
+export class Splitter extends Component<splitter.Context, splitter.Api> {
+  initService(context: splitter.Context) {
+    return splitter.machine({
+      id: context.id,
+      orientation: context.orientation,
+      size: this.panels.map((panelEl) => ({
+        id: panelEl.getAttribute('data-value') || '',
+        size: Number(panelEl.getAttribute('data-size') || 50),
+      }))
     })
-    splitterPanels.forEach(item => {
-      return invariant(item, `Cannot find panel element with attribute: ${SPLITTER_PANEL_SELECTOR}`);
-    })
-
-    if (prev) prev();
-    let cleanups = [
-      attrs(splitterRootEl, api.getRootProps()),
-      ...splitterPanels.map(item => attrs(item.el, api.getPanelProps({ id: item.id }))),
-      ...splitterTriggers.map(item => attrs(item.el, api.getResizeTriggerProps({ id: item.id as `${string}:${string}` })))
-    ];
-    prev = () => {
-      cleanups.forEach((fn) => fn());
-    };
   }
 
-  service.subscribe(() => {
-    const api = splitter.connect(
-      service.state,
-      service.send,
-      normalizeProps
-    );
-    render(api);
-  });
+  initApi() {
+    return splitter.connect(this.service.state, this.service.send, normalizeProps)
+  }
 
-  service._created()
-  service.start()
+  render = () => {
+    spreadProps(this.rootEl, this.api.getRootProps())
+    this.resizers.forEach((panelEl) => {
+      this.renderResizer(panelEl)
+    })
+    this.panels.forEach((panelEl) => {
+      this.renderPanel(panelEl)
+    })
+  }
+
+  private get resizers() {
+    return Array.from(this.rootEl!.querySelectorAll<HTMLElement>('[data-part="splitter-resizer"'))
+  }
+  private get panels() {
+    return Array.from(this.rootEl!.querySelectorAll<HTMLElement>('[data-part="splitter-panel"]'))
+  }
+
+  private renderResizer = (resizerEl: HTMLElement) => {
+    const value = resizerEl.dataset.value
+    if (!value) throw new Error("Expected value to be defined")
+    spreadProps(resizerEl, this.api.getResizeTriggerProps({ id: value as `${string}:${string}` }))
+  }
+
+  private renderPanel = (panelEl: HTMLElement) => {
+    const value = panelEl.dataset.value
+    if (!value) throw new Error("Expected value to be defined")
+
+    spreadProps(panelEl, this.api.getPanelProps({ id: value }))
+  }
 }
-
-export function initSplitter() {
-  Array.from(
-    document.querySelectorAll<HTMLElement>(SPLITTER_ROOT_SELECTOR)
-  ).forEach(init);
-}
-
