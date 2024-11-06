@@ -4,6 +4,7 @@ import { spreadProps } from "./utils/spread-props"
 import { Component } from "./utils/component"
 
 export class Accordion extends Component<accordion.Context, accordion.Api> {
+
   initService(context: accordion.Context) {
     return accordion.machine(context)
   }
@@ -20,11 +21,11 @@ export class Accordion extends Component<accordion.Context, accordion.Api> {
   }
 
   private get items() {
-    return Array.from(this.rootEl!.querySelectorAll<HTMLElement>('[data-part="accordion-item"]'))
+    return Array.from(this.rootEl.querySelectorAll<HTMLElement>('[data-part="accordion-item"]'))
   }
 
   private renderItem = (itemEl: HTMLElement) => {
-    const value = itemEl.dataset.value
+    const value = itemEl.getAttribute('data-value')
     if (!value) throw new Error("Expected value to be defined")
     const itemTriggerEl = itemEl.querySelector<HTMLButtonElement>('[data-part="accordion-trigger"]')
     const itemContentEl = itemEl.querySelector<HTMLElement>('[data-part="accordion-content"]')

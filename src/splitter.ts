@@ -29,20 +29,20 @@ export class Splitter extends Component<splitter.Context, splitter.Api> {
   }
 
   private get resizers() {
-    return Array.from(this.rootEl!.querySelectorAll<HTMLElement>('[data-part="splitter-resizer"'))
+    return Array.from(this.rootEl.querySelectorAll<HTMLElement>('[data-part="splitter-resizer"]'))
   }
   private get panels() {
-    return Array.from(this.rootEl!.querySelectorAll<HTMLElement>('[data-part="splitter-panel"]'))
+    return Array.from(this.rootEl.querySelectorAll<HTMLElement>('[data-part="splitter-panel"]'))
   }
 
   private renderResizer = (resizerEl: HTMLElement) => {
-    const value = resizerEl.dataset.value
+    const value = resizerEl.getAttribute('data-value')
     if (!value) throw new Error("Expected value to be defined")
     spreadProps(resizerEl, this.api.getResizeTriggerProps({ id: value as `${string}:${string}` }))
   }
 
   private renderPanel = (panelEl: HTMLElement) => {
-    const value = panelEl.dataset.value
+    const value = panelEl.getAttribute('data-value')
     if (!value) throw new Error("Expected value to be defined")
 
     spreadProps(panelEl, this.api.getPanelProps({ id: value }))

@@ -13,7 +13,8 @@
       [data-part="checkbox-control"][data-state="checked"] {
         background-color: green;
       }
-      [data-part="checkbox-control"][data-state="indeterminate"] {
+      [data-part="checkbox-control"][data-state="indeterminate"],
+      [data-state="checked"] {
         background-color: blue;
       }
       [data-part="checkbox-indicator"][data-state="indeterminate"] {
@@ -132,6 +133,83 @@
             checked
           />
         </label>
+      </div>
+    </div>
+
+    <hr />
+
+    <div>
+      <button data-part="menu-trigger" data-target="one">
+        Actions <span>▾</span>
+      </button>
+      <div data-part="menu-positioner" data-value="one">
+        <ul data-part="menu-content">
+          <li data-part="menu-item" data-value="edit">Edit</li>
+          <li data-part="menu-item" data-value="duplicate">Duplicate</li>
+          <li data-part="menu-item" data-value="delete">Delete</li>
+          <li data-part="menu-item" data-value="export" data-disabled>
+            Export...
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <hr />
+
+    <div>
+      <button data-part="menu-trigger" data-target="two">
+        Checkbox <span>▾</span>
+      </button>
+      <div data-part="menu-positioner" data-value="two">
+        <ul data-part="menu-content">
+          <li data-type="checkbox" data-part="menu-item" data-value="edit">
+            Edit
+          </li>
+          <li data-type="checkbox" data-part="menu-item" data-value="duplicate">
+            Duplicate
+          </li>
+          <li data-type="checkbox" data-part="menu-item" data-value="delete">
+            Delete
+          </li>
+          <li
+            data-type="checkbox"
+            data-part="menu-item"
+            data-value="export"
+            data-disabled
+          >
+            Export...
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <hr />
+
+    <div>
+      <button data-part="menu-trigger" data-target="three">
+        Indicator <span>▾</span>
+      </button>
+      <div data-part="menu-positioner" data-value="three">
+        <ul data-part="menu-content">
+          <li data-type="radio" data-part="menu-item" data-value="edit">
+            <span data-part="menu-item-indicator">✅</span>
+            <span data-part="menu-item-text">Edit</span>
+          </li>
+          <li data-type="radio" data-part="menu-item" data-value="duplicate">
+            Duplicate
+          </li>
+          <li data-type="radio" data-part="menu-item" data-value="delete">
+            Delete
+          </li>
+          <li
+            data-type="radio"
+            data-part="menu-item"
+            data-value="export"
+            data-disabled
+          >
+            Export...
+          </li>
+        </ul>
       </div>
     </div>
     <script type="module" src="/src/main.ts"></script>
