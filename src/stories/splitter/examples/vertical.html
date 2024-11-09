@@ -1,20 +1,20 @@
 <div style="height: 200px">
   <div data-part="splitter-root" data-orientation="vertical">
-    <div data-part="splitter-panel" data-value="a">
+    <div
+      data-part="splitter-panel"
+      data-value="a"
+      class="flex items-center justify-center"
+    >
       <p>A</p>
     </div>
     <div data-part="splitter-resizer" data-value="a:b">
-      <div
-        style="
-          background: black;
-          height: 8px;
-          width: 100%;
-          margin-top: 8px;
-          margin-bottom: 8px;
-        "
-      ></div>
+      <div class="bg-black w-full h-2 my-2"></div>
     </div>
-    <div data-part="splitter-panel" data-value="b">
+    <div
+      data-part="splitter-panel"
+      data-value="b"
+      class="flex items-center justify-center"
+    >
       <p>B</p>
     </div>
   </div>

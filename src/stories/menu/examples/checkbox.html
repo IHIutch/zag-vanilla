@@ -3,21 +3,43 @@
     Checkbox <span>▾</span>
   </button>
   <div data-part="menu-positioner" data-value="two">
-    <ul data-part="menu-content">
-      <li data-type="checkbox" data-part="menu-item" data-value="edit">Edit</li>
-      <li data-type="checkbox" data-part="menu-item" data-value="duplicate">
-        Duplicate
-      </li>
-      <li data-type="checkbox" data-part="menu-item" data-value="delete">
-        Delete
+    <ul data-part="menu-content" class="list-none pl-0 min-w-32 my-0">
+      <li
+        data-type="checkbox"
+        data-part="menu-item"
+        data-value="edit"
+        class="hover:bg-gray-1 px-2 py-1"
+      >
+        <span data-part="menu-item-indicator">✅</span>
+        <span data-part="menu-item-text">Edit</span>
       </li>
       <li
+        data-type="checkbox"
+        data-part="menu-item"
+        data-value="duplicate"
+        class="hover:bg-gray-1 px-2 py-1"
+      >
+        <span data-part="menu-item-indicator">✅</span>
+        <span data-part="menu-item-text">Duplicate</span>
+      </li>
+      <li
+        data-type="checkbox"
+        data-part="menu-item"
+        data-value="delete"
+        class="hover:bg-gray-1 px-2 py-1"
+      >
+        <span data-part="menu-item-indicator">✅</span>
+        <span data-part="menu-item-text">Delete</span>
+      </li>
+      <li
+        class="hover:bg-gray-1 px-2 py-1"
         data-type="checkbox"
         data-part="menu-item"
         data-value="export"
         data-disabled
       >
-        Export...
+        <span data-part="menu-item-indicator">✅</span>
+        <span data-part="menu-item-text">Export...</span>
       </li>
     </ul>
   </div>
