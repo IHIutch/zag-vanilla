@@ -1,27 +1,35 @@
 <div>
-  <button data-part="menu-trigger" data-target="one">
-    Actions <span>▾</span>
+  <button
+    data-part="menu-trigger"
+    data-target="one"
+    class="flex items-center gap-2 bg-white hover:bg-gray-100 border border-solid border-gray-300 h-10 px-3 rounded"
+  >
+    Actions
+    <div class="i-material-symbols:keyboard-arrow-down size-4"></div>
   </button>
   <div data-part="menu-positioner" data-value="one">
-    <ul data-part="menu-content" class="list-none pl-0 min-w-32 my-0">
+    <ul
+      data-part="menu-content"
+      class="list-none p-1.5 min-w-32 my-0 outline-none border border-solid border-gray-200 shadow-lg rounded"
+    >
       <li
         data-part="menu-item"
         data-value="edit"
-        class="hover:bg-gray-1 px-2 py-1"
+        class="hover:bg-gray-1 highlighted:bg-gray-1 px-2 h-8 flex items-center cursor-default"
       >
         Edit
       </li>
       <li
         data-part="menu-item"
         data-value="duplicate"
-        class="hover:bg-gray-1 px-2 py-1"
+        class="hover:bg-gray-1 highlighted:bg-gray-1 px-2 h-8 flex items-center cursor-default"
       >
         Duplicate
       </li>
       <li
         data-part="menu-item"
         data-value="delete"
-        class="hover:bg-gray-1 px-2 py-1"
+        class="hover:bg-gray-1 highlighted:bg-gray-1 px-2 h-8 flex items-center cursor-default"
       >
         Delete
       </li>
@@ -29,7 +37,7 @@
         data-part="menu-item"
         data-value="export"
         data-disabled
-        class="hover:bg-gray-1 px-2 py-1"
+        class="px-2 h-8 flex items-center data-[disabled]:text-gray-500 data-[disabled]:cursor-not-allowed"
       >
         Export...
       </li>

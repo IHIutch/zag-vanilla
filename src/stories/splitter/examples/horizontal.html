@@ -1,19 +1,23 @@
-<div data-part="splitter-root">
-  <div
-    data-part="splitter-panel"
-    data-value="a"
-    class="flex items-center justify-center"
-  >
-    <p>A</p>
-  </div>
-  <div data-part="splitter-resizer" data-value="a:b">
-    <div class="bg-black h-full w-2 m-inline-2"></div>
-  </div>
-  <div
-    data-part="splitter-panel"
-    data-value="b"
-    class="flex items-center justify-center"
-  >
-    <p>B</p>
+<div class="h-40">
+  <div data-part="splitter-root" class="flex gap-2">
+    <div
+      data-part="splitter-panel"
+      data-value="a"
+      class="flex items-center justify-center border border-solid border-gray-200 rounded-"
+    >
+      A
+    </div>
+    <button
+      data-part="splitter-resizer"
+      data-value="a:b"
+      class="bg-zinc-400 w-1.5 rounded-full my-4"
+    ></button>
+    <div
+      data-part="splitter-panel"
+      data-value="b"
+      class="flex items-center justify-center border border-solid border-gray-200 rounded-sm"
+    >
+      B
+    </div>
   </div>
 </div>

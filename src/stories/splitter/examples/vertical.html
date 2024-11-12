@@ -1,21 +1,27 @@
-<div style="height: 200px">
-  <div data-part="splitter-root" data-orientation="vertical">
+<div class="h-40">
+  <div
+    data-part="splitter-root"
+    data-orientation="vertical"
+    class="flex gap-2 font-sans"
+  >
     <div
       data-part="splitter-panel"
       data-value="a"
-      class="flex items-center justify-center"
+      class="flex items-center justify-center border border-solid border-gray-200 rounded-"
     >
-      <p>A</p>
+      A
     </div>
-    <div data-part="splitter-resizer" data-value="a:b">
-      <div class="bg-black w-full h-2 my-2"></div>
-    </div>
+    <button
+      data-part="splitter-resizer"
+      data-value="a:b"
+      class="bg-zinc-400 w-[calc(100%-32px)] h-1.5 rounded-full mx-auto"
+    ></button>
     <div
       data-part="splitter-panel"
       data-value="b"
-      class="flex items-center justify-center"
+      class="flex items-center justify-center border border-solid border-gray-200 rounded-sm"
     >
-      <p>B</p>
+      B
     </div>
   </div>
 </div>

@@ -20,6 +20,9 @@ importers:
       '@unocss/reset':
         specifier: ^0.64.0
         version: 0.64.0
+      '@unocss/rule-utils':
+        specifier: ^0.64.0
+        version: 0.64.0
       '@zag-js/accordion':
         specifier: ^0.74.2
         version: 0.74.2

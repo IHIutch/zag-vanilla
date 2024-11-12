@@ -2,7 +2,7 @@
   <label data-part="checkbox-root" class="flex gap-2 items-center">
     <div
       data-part="checkbox-control"
-      class="size-4 text-white flex items-center justify-center border border-solid text-gray-500 border-gray-600 data-[state='indeterminate']:border-blue-600 data-[state='checked']:border-blue-600 data-[state='indeterminate']:bg-blue-600 data-[state='unchecked']:bg-white data-[state='checked']:bg-blue-600"
+      class="size-4 text-white flex items-center justify-center border border-solid text-gray-500 border-gray-600 state-[indeterminate]:border-blue-600 state-[checked]:border-blue-600 state-[indeterminate]:bg-blue-600 state-[unchecked]:bg-white state-[checked]:bg-blue-600"
     >
       <div
         data-part="checkbox-indicator"
@@ -10,10 +10,10 @@
         class="size-4 flex items-center justify-center group"
       >
         <div
-          class="hidden i-material-symbols:check size-full group-[[data-state='checked']]:block"
+          class="hidden i-material-symbols:check size-full group-state-[checked]:block"
         ></div>
         <div
-          class="hidden i-material-symbols:check-indeterminate-small size-full group-[[data-state='indeterminate']]:block"
+          class="hidden i-material-symbols:check-indeterminate-small size-full group-state-[indeterminate]:block"
         ></div>
       </div>
     </div>

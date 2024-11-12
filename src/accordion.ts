@@ -29,10 +29,16 @@ export class Accordion extends Component<accordion.Context, accordion.Api> {
     if (!value) throw new Error("Expected value to be defined")
     const itemTriggerEl = itemEl.querySelector<HTMLButtonElement>('[data-part="accordion-trigger"]')
     const itemContentEl = itemEl.querySelector<HTMLElement>('[data-part="accordion-content"]')
+
     if (!itemTriggerEl) throw new Error("Expected triggerEl to be defined")
     if (!itemContentEl) throw new Error("Expected contentEl to be defined")
     spreadProps(itemEl, this.api.getItemProps({ value }))
     spreadProps(itemTriggerEl, this.api.getItemTriggerProps({ value }))
     spreadProps(itemContentEl, this.api.getItemContentProps({ value }))
+
+    const itemIndicatorEl = itemEl.querySelector<HTMLElement>('[data-part="accordion-indicator"]')
+    if (itemIndicatorEl) {
+      spreadProps(itemIndicatorEl, this.api.getItemIndicatorProps({ value }))
+    }
   }
 }
