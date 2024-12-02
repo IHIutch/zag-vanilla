@@ -18,7 +18,7 @@ export class Splitter extends Component<splitter.Context, splitter.Api> {
     return splitter.connect(this.service.state, this.service.send, normalizeProps)
   }
 
-  render = () => {
+  render() {
     spreadProps(this.rootEl, this.api.getRootProps())
     this.resizers.forEach((panelEl) => {
       this.renderResizer(panelEl)
@@ -35,16 +35,33 @@ export class Splitter extends Component<splitter.Context, splitter.Api> {
     return Array.from(this.rootEl.querySelectorAll<HTMLElement>('[data-part="splitter-panel"]'))
   }
 
-  private renderResizer = (resizerEl: HTMLElement) => {
+  private renderResizer(resizerEl: HTMLElement) {
     const value = resizerEl.getAttribute('data-value')
     if (!value) throw new Error("Expected value to be defined")
+    if (!/^[^:]+:[^:]+$/.test(value)) throw new Error("Resizer value must be in format 'panelA:panelB'")
     spreadProps(resizerEl, this.api.getResizeTriggerProps({ id: value as `${string}:${string}` }))
   }
 
-  private renderPanel = (panelEl: HTMLElement) => {
+  private renderPanel(panelEl: HTMLElement) {
     const value = panelEl.getAttribute('data-value')
     if (!value) throw new Error("Expected value to be defined")
 
     spreadProps(panelEl, this.api.getPanelProps({ id: value }))
   }
+}
+
+
+export function splitterInit() {
+  document.querySelectorAll<HTMLElement>('[data-part="splitter-root"]').forEach((rootEl) => {
+    const splitter = new Splitter(rootEl, {
+      id: crypto.randomUUID(),
+      orientation: rootEl.getAttribute('data-orientation') === 'vertical' ? 'vertical' : 'horizontal'
+    })
+    splitter.init()
+  })
+}
+
+if (typeof window !== 'undefined') {
+  window.Splitter = Splitter
+  window.splitterInit = splitterInit
 }

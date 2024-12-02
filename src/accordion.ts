@@ -6,14 +6,17 @@ import { Component } from "./utils/component"
 export class Accordion extends Component<accordion.Context, accordion.Api> {
 
   initService(context: accordion.Context) {
-    return accordion.machine(context)
+    return accordion.machine({
+      multiple: this.rootEl.hasAttribute('data-multiple'),
+      ...context
+    })
   }
 
   initApi() {
     return accordion.connect(this.service.state, this.service.send, normalizeProps)
   }
 
-  render = () => {
+  render() {
     spreadProps(this.rootEl, this.api.getRootProps())
     this.items.forEach((itemEl) => {
       this.renderItem(itemEl)
@@ -24,7 +27,7 @@ export class Accordion extends Component<accordion.Context, accordion.Api> {
     return Array.from(this.rootEl.querySelectorAll<HTMLElement>('[data-part="accordion-item"]'))
   }
 
-  private renderItem = (itemEl: HTMLElement) => {
+  private renderItem(itemEl: HTMLElement) {
     const value = itemEl.getAttribute('data-value')
     if (!value) throw new Error("Expected value to be defined")
     const itemTriggerEl = itemEl.querySelector<HTMLButtonElement>('[data-part="accordion-trigger"]')
@@ -41,4 +44,18 @@ export class Accordion extends Component<accordion.Context, accordion.Api> {
       spreadProps(itemIndicatorEl, this.api.getItemIndicatorProps({ value }))
     }
   }
+}
+
+export function accordionInit() {
+  document.querySelectorAll<HTMLElement>('[data-part="accordion-root"]').forEach((rootEl) => {
+    const accordion = new Accordion(rootEl, {
+      id: crypto.randomUUID(),
+    })
+    accordion.init()
+  })
+}
+
+if (typeof window !== 'undefined') {
+  window.Accordion = Accordion
+  window.accordionInit = accordionInit
 }

@@ -35,6 +35,7 @@
     "@zag-js/accordion": "^0.74.2",
     "@zag-js/checkbox": "^0.74.2",
     "@zag-js/core": "^0.74.2",
+    "@zag-js/dialog": "^0.74.2",
     "@zag-js/dom-event": "^0.74.2",
     "@zag-js/dom-query": "^0.74.2",
     "@zag-js/menu": "^0.74.2",

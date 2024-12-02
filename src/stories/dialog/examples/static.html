@@ -1,0 +1,58 @@
+<div>
+  <button
+    data-part="dialog-trigger"
+    data-target="modal"
+    class="flex items-center gap-2 bg-white hover:bg-gray-100 border border-solid border-gray-300 h-10 px-3 rounded"
+    type="button"
+  >
+    Static Dialog
+  </button>
+  <div
+    data-part="dialog-backdrop"
+    data-value="modal"
+    class="bg-black/50 fixed inset-0 size-full"
+  ></div>
+  <div
+    data-part="dialog-positioner"
+    data-value="modal"
+    class="fixed inset-0 size-full"
+  >
+    <div
+      data-part="dialog-content"
+      data-static
+      class="relative mx-auto my-8 max-w-xl"
+    >
+      <div class="bg-white rounded-lg">
+        <div class="p-4">
+          <h2 data-part="dialog-title" class="text-xl font-medium">
+            Modal title
+          </h2>
+          <p data-part="dialog-description">Modal description</p>
+          <button
+            type="button"
+            class="text-black flex justify-center items-center bg-gray-100 hover:bg-gray-200 size-8 rounded absolute top-3 right-3"
+            data-part="dialog-close-trigger"
+          >
+            <span class="sr-only">Close modal</span>
+            <div
+              aria-hidden="true"
+              class="i-material-symbols:close size-6"
+            ></div>
+          </button>
+        </div>
+        <div class="p-4">
+          <p>Woo-hoo, you're reading this text in a modal!</p>
+        </div>
+        <div class="p-4 flex justify-end">
+          <button
+            type="button"
+            class="text-black flex items-center bg-gray-100 hover:bg-gray-200 h-10 px-3 rounded"
+            data-part="dialog-close-trigger"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
