@@ -8,16 +8,14 @@ export class Menu extends Component<menu.Context, menu.Api> {
   private checkedState: Map<string, boolean> = new Map();
 
   initService(context: menu.Context) {
-    return menu.machine({
-      ...context,
-    })
+    return menu.machine(context)
   }
 
   initApi() {
     return menu.connect(this.service.state, this.service.send, normalizeProps)
   }
 
-  render = () => {
+  render() {
     spreadProps(this.rootEl, this.api.getTriggerProps())
 
     this.renderPositioner(this.positioner)
@@ -46,15 +44,15 @@ export class Menu extends Component<menu.Context, menu.Api> {
     return Array.from(this.content.querySelectorAll<HTMLElement>('[data-part="menu-item"]'))
   }
 
-  private renderPositioner = (positionerEl: HTMLElement) => {
+  private renderPositioner(positionerEl: HTMLElement) {
     spreadProps(positionerEl, this.api.getPositionerProps())
   }
 
-  private renderContent = (contentEl: HTMLElement) => {
+  private renderContent(contentEl: HTMLElement) {
     spreadProps(contentEl, this.api.getContentProps())
   }
 
-  private renderItem = (itemEl: HTMLElement) => {
+  private renderItem(itemEl: HTMLElement) {
     const value = itemEl.getAttribute('data-value')
     if (!value) throw new Error("Expected value to be defined")
 
@@ -104,4 +102,18 @@ export class Menu extends Component<menu.Context, menu.Api> {
     }
 
   }
+}
+
+export function menuInit() {
+  document.querySelectorAll<HTMLElement>('[data-part="menu-trigger"]').forEach((targetEl) => {
+    const menu = new Menu(targetEl, {
+      id: crypto.randomUUID(),
+    })
+    menu.init()
+  })
+}
+
+if (typeof window !== 'undefined') {
+  window.Menu = Menu
+  window.menuInit = menuInit
 }

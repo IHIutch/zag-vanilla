@@ -1,0 +1,50 @@
+<div>
+  <button
+    data-part="menu-trigger"
+    data-target="icons"
+    class="flex items-center gap-2 bg-white hover:bg-gray-100 border border-solid border-gray-300 h-10 px-3 rounded"
+  >
+    Share
+    <div class="i-material-symbols:keyboard-arrow-down size-4.5"></div>
+  </button>
+  <div data-part="menu-positioner" data-value="icons">
+    <ul
+      data-part="menu-content"
+      class="list-none p-1.5 min-w-48 my-0 outline-none border border-solid border-gray-200 shadow-lg rounded"
+    >
+      <li
+        data-part="menu-item"
+        data-value="copy"
+        class="hover:bg-gray-1 highlighted:bg-gray-1 px-2 h-8 flex items-center gap-2 cursor-default"
+      >
+        <span class="i-material-symbols:content-copy size-4.5"></span>
+        Copy link
+      </li>
+      <li
+        data-part="menu-item"
+        data-value="email"
+        class="hover:bg-gray-1 highlighted:bg-gray-1 px-2 h-8 flex items-center gap-2 cursor-default"
+      >
+        <span class="i-material-symbols:mail size-4.5"></span>
+        Email
+      </li>
+      <li
+        data-part="menu-item"
+        data-value="message"
+        class="hover:bg-gray-1 highlighted:bg-gray-1 px-2 h-8 flex items-center gap-2 cursor-default"
+      >
+        <span class="i-material-symbols:chat size-4.5"></span>
+        Message
+      </li>
+
+      <li
+        data-part="menu-item"
+        data-value="delete"
+        class="hover:bg-red-1 highlighted:bg-red-1 px-2 h-8 flex items-center gap-2 cursor-default text-red-600"
+      >
+        <span class="i-material-symbols:delete size-4.5"></span>
+        Delete
+      </li>
+    </ul>
+  </div>
+</div>

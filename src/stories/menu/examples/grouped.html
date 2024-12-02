@@ -1,21 +1,22 @@
 <div>
   <button
     data-part="menu-trigger"
-    data-target="three"
+    data-target="grouped"
     class="flex items-center gap-2 bg-white hover:bg-gray-100 border border-solid border-gray-300 h-10 px-3 rounded"
   >
-    Indicator
+    Sort by
     <div class="i-material-symbols:keyboard-arrow-down size-4.5"></div>
   </button>
-  <div data-part="menu-positioner" data-value="three">
+  <div data-part="menu-positioner" data-value="grouped">
     <ul
       data-part="menu-content"
-      class="list-none p-1.5 min-w-32 my-0 outline-none border border-solid border-gray-200 shadow-lg rounded"
+      class="list-none p-1.5 min-w-48 my-0 outline-none border border-solid border-gray-200 shadow-lg rounded"
     >
+      <li class="px-2 py-1 text-sm text-gray-500">Sort options</li>
       <li
         data-type="radio"
         data-part="menu-item"
-        data-value="edit"
+        data-value="name"
         class="relative hover:bg-gray-1 highlighted:bg-gray-1 px-2 h-8 flex items-center cursor-default"
       >
         <div class="absolute h-full flex items-center">
@@ -25,12 +26,12 @@
             aria-hidden="true"
           ></span>
         </div>
-        <span data-part="menu-item-text" class="pl-6">Edit</span>
+        <span data-part="menu-item-text" class="pl-6">By name</span>
       </li>
       <li
         data-type="radio"
         data-part="menu-item"
-        data-value="duplicate"
+        data-value="date"
         class="relative hover:bg-gray-1 highlighted:bg-gray-1 px-2 h-8 flex items-center cursor-default"
       >
         <div class="absolute h-full flex items-center">
@@ -40,12 +41,14 @@
             aria-hidden="true"
           ></span>
         </div>
-        <span data-part="menu-item-text" class="pl-6">Duplicate</span>
+        <span data-part="menu-item-text" class="pl-6">By date</span>
       </li>
+      <!-- <li class="h-px bg-gray-200 my-1.5"></li> -->
+      <li class="px-2 py-1 text-sm text-gray-500">View options</li>
       <li
-        data-type="radio"
+        data-type="checkbox"
         data-part="menu-item"
-        data-value="delete"
+        data-value="hidden"
         class="relative hover:bg-gray-1 highlighted:bg-gray-1 px-2 h-8 flex items-center cursor-default"
       >
         <div class="absolute h-full flex items-center">
@@ -55,23 +58,7 @@
             aria-hidden="true"
           ></span>
         </div>
-        <span data-part="menu-item-text" class="pl-6">Delete</span>
-      </li>
-      <li
-        data-type="radio"
-        data-part="menu-item"
-        data-value="export"
-        data-disabled
-        class="relative px-2 h-8 flex items-center data-[disabled]:text-gray-500 data-[disabled]:cursor-not-allowed"
-      >
-        <div class="absolute h-full flex items-center">
-          <span
-            data-part="menu-item-indicator"
-            class="i-material-symbols:check size-4.5"
-            aria-hidden="true"
-          ></span>
-        </div>
-        <span data-part="menu-item-text" class="pl-6">Export...</span>
+        <span data-part="menu-item-text" class="pl-6">Show hidden files</span>
       </li>
     </ul>
   </div>

@@ -1,0 +1,61 @@
+<div>
+  <button
+    data-part="menu-trigger"
+    data-target="shortcuts"
+    class="flex items-center gap-2 bg-white hover:bg-gray-100 border border-solid border-gray-300 h-10 px-3 rounded"
+  >
+    Edit
+    <div class="i-material-symbols:keyboard-arrow-down size-4.5"></div>
+  </button>
+  <div data-part="menu-positioner" data-value="shortcuts">
+    <ul
+      data-part="menu-content"
+      class="list-none p-1.5 min-w-64 my-0 outline-none border border-solid border-gray-200 shadow-lg rounded"
+    >
+      <li
+        data-part="menu-item"
+        data-value="undo"
+        class="hover:bg-gray-1 highlighted:bg-gray-1 px-2 py-1 flex flex-col cursor-default"
+      >
+        <div class="flex items-center justify-between">
+          <span class="flex items-center gap-2">
+            <span class="i-material-symbols:undo size-4.5"></span>
+            Undo
+          </span>
+          <span class="text-sm text-gray-500">⌘Z</span>
+        </div>
+        <span class="text-xs text-gray-500">Undo last action</span>
+      </li>
+      <li
+        data-part="menu-item"
+        data-value="redo"
+        class="hover:bg-gray-1 highlighted:bg-gray-1 px-2 py-1 flex flex-col cursor-default"
+      >
+        <div class="flex items-center justify-between">
+          <span class="flex items-center gap-2">
+            <span class="i-material-symbols:redo size-4.5"></span>
+            Redo
+          </span>
+          <span class="text-sm text-gray-500">⇧⌘Z</span>
+        </div>
+        <span class="text-xs text-gray-500">Redo last action</span>
+      </li>
+      <li class="h-px bg-gray-200 my-1.5"></li>
+      <li
+        data-part="menu-item"
+        data-value="cut"
+        data-disabled
+        class="px-2 py-1 flex flex-col data-[disabled]:text-gray-500 data-[disabled]:cursor-not-allowed"
+      >
+        <div class="flex items-center justify-between">
+          <span class="flex items-center gap-2">
+            <span class="i-material-symbols:content-cut size-4.5"></span>
+            Cut
+          </span>
+          <span class="text-sm">⌘X</span>
+        </div>
+        <span class="text-xs">No content selected</span>
+      </li>
+    </ul>
+  </div>
+</div>
