@@ -29,6 +29,9 @@ importers:
       '@zag-js/avatar':
         specifier: ^0.82.0
         version: 0.82.0
+      '@zag-js/carousel':
+        specifier: ^0.82.0
+        version: 0.82.0
       '@zag-js/checkbox':
         specifier: ^0.82.0
         version: 0.82.0
@@ -1269,6 +1272,9 @@ packages:
   '@zag-js/avatar@0.82.0':
     resolution: {integrity: sha512-ae2ADj7BHccv1QG9hv86zvLmuUFlUrAGAKNlEn7A7DIEUhvaskYf6oN9VlufkVzoRN//w6KGX/o2xCuEVeeEWQ==}
 
+  '@zag-js/carousel@0.82.0':
+    resolution: {integrity: sha512-JEhr71J30gy/htbURYYQkGajTQn0AyE5k6cuNvd4IgJjQH8epZMtyJrsvLzjtEgnpT3UwORY3LXs4dosZGmbBQ==}
+
   '@zag-js/checkbox@0.82.0':
     resolution: {integrity: sha512-uqsAg2r2RgU6QWPUaCVI4Sb2W1Ff53Yr6GWUF6pcBlu7OrfNyJOR6Z2fVOYn8MdwI4l8zzrzdSGQXaT4xnrfCQ==}
 
@@ -1310,6 +1316,9 @@ packages:
 
   '@zag-js/remove-scroll@0.82.0':
     resolution: {integrity: sha512-rMbPG07uCu+EVf03VTCopnPvqaEmFoRlAjwBF/4WCv1LE2q1Ga5H7++p8hauagaRxfYU/X5X2WfjG7kLu5zsNQ==}
+
+  '@zag-js/scroll-snap@0.82.0':
+    resolution: {integrity: sha512-RIDU3SspJop3tEuowRxZ/lkjJhl+ChsKPdCJSSokCGnT+5Y7CjpRoAMpZPVTaVenim8rn8r0evktmIWQR7/kVg==}
 
   '@zag-js/splitter@0.82.0':
     resolution: {integrity: sha512-U13hv4bn93vInC+M60jKYrWT5ILKCPG6d80F8ejLRAqENXq9nC355uqPm7oX+GWJOBNZn0R2viAPsGJ4qFoq/Q==}
@@ -4266,6 +4275,15 @@ snapshots:
       '@zag-js/types': 0.82.0
       '@zag-js/utils': 0.82.0
 
+  '@zag-js/carousel@0.82.0':
+    dependencies:
+      '@zag-js/anatomy': 0.82.0
+      '@zag-js/core': 0.82.0
+      '@zag-js/dom-query': 0.82.0
+      '@zag-js/scroll-snap': 0.82.0
+      '@zag-js/types': 0.82.0
+      '@zag-js/utils': 0.82.0
+
   '@zag-js/checkbox@0.82.0':
     dependencies:
       '@zag-js/anatomy': 0.82.0
@@ -4343,6 +4361,10 @@ snapshots:
   '@zag-js/rect-utils@0.82.0': {}
 
   '@zag-js/remove-scroll@0.82.0':
+    dependencies:
+      '@zag-js/dom-query': 0.82.0
+
+  '@zag-js/scroll-snap@0.82.0':
     dependencies:
       '@zag-js/dom-query': 0.82.0
 

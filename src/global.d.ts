@@ -1,5 +1,6 @@
 import type { Accordion } from './components/accordion'
 import type { Avatar } from './components/avatar'
+import type { Carousel } from './components/carousel'
 import type { Checkbox } from './components/checkbox'
 import type { Dialog } from './components/dialog'
 import type { Splitter } from './components/splitter'
@@ -11,6 +12,9 @@ declare global {
     //
     Avatar: typeof Avatar
     avatarInit: () => void
+    //
+    Carousel: typeof Carousel
+    carouselInit: () => void
     //
     Checkbox: typeof Checkbox
     checkboxInit: () => void

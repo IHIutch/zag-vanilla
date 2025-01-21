@@ -19,6 +19,7 @@
     "@unocss/rule-utils": "^65.4.2",
     "@zag-js/accordion": "^0.82.0",
     "@zag-js/avatar": "^0.82.0",
+    "@zag-js/carousel": "^0.82.0",
     "@zag-js/checkbox": "^0.82.0",
     "@zag-js/core": "^0.82.0",
     "@zag-js/dialog": "^0.82.0",
