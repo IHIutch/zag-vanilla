@@ -1,8 +1,8 @@
 import * as splitter from '@zag-js/splitter'
 import { nanoid } from 'nanoid'
-import { Component } from './utils/component'
-import { normalizeProps } from './utils/normalize-props'
-import { spreadProps } from './utils/spread-props'
+import { Component } from '../utils/component'
+import { normalizeProps } from '../utils/normalize-props'
+import { spreadProps } from '../utils/spread-props'
 
 export class Splitter extends Component<splitter.Context, splitter.Api> {
   initService(context: splitter.Context) {

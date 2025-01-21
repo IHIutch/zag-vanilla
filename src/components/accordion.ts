@@ -1,8 +1,8 @@
 import * as accordion from '@zag-js/accordion'
 import { nanoid } from 'nanoid'
-import { Component } from './utils/component'
-import { normalizeProps } from './utils/normalize-props'
-import { spreadProps } from './utils/spread-props'
+import { Component } from '../utils/component'
+import { normalizeProps } from '../utils/normalize-props'
+import { spreadProps } from '../utils/spread-props'
 
 export class Accordion extends Component<accordion.Context, accordion.Api> {
   initService(context: accordion.Context) {

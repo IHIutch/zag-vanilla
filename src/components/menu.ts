@@ -1,8 +1,8 @@
 import * as menu from '@zag-js/menu'
 import { nanoid } from 'nanoid'
-import { Component } from './utils/component'
-import { normalizeProps } from './utils/normalize-props'
-import { spreadProps } from './utils/spread-props'
+import { Component } from '../utils/component'
+import { normalizeProps } from '../utils/normalize-props'
+import { spreadProps } from '../utils/spread-props'
 
 export class Menu extends Component<menu.Context, menu.Api> {
   private checkedState: Map<string, boolean> = new Map()

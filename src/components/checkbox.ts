@@ -1,8 +1,8 @@
 import * as checkbox from '@zag-js/checkbox'
 import { nanoid } from 'nanoid'
-import { Component } from './utils/component'
-import { normalizeProps } from './utils/normalize-props'
-import { spreadProps } from './utils/spread-props'
+import { Component } from '../utils/component'
+import { normalizeProps } from '../utils/normalize-props'
+import { spreadProps } from '../utils/spread-props'
 
 export class Checkbox extends Component<checkbox.Context, checkbox.Api> {
   initService(context: checkbox.Context) {

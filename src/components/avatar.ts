@@ -1,8 +1,8 @@
 import * as avatar from '@zag-js/avatar'
 import { nanoid } from 'nanoid'
-import { Component } from './utils/component'
-import { normalizeProps } from './utils/normalize-props'
-import { spreadProps } from './utils/spread-props'
+import { Component } from '../utils/component'
+import { normalizeProps } from '../utils/normalize-props'
+import { spreadProps } from '../utils/spread-props'
 
 export class Avatar extends Component<avatar.Context, avatar.Api> {
   initService(context: avatar.Context) {

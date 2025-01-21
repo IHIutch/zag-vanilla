@@ -1,8 +1,8 @@
-import type { Accordion } from './accordion'
-import type { Avatar } from './avatar'
-import type { Checkbox } from './checkbox'
-import type { Dialog } from './dialog'
-import type { Splitter } from './splitter'
+import type { Accordion } from './components/accordion'
+import type { Avatar } from './components/avatar'
+import type { Checkbox } from './components/checkbox'
+import type { Dialog } from './components/dialog'
+import type { Splitter } from './components/splitter'
 
 declare global {
   interface Window {
