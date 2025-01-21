@@ -2,6 +2,7 @@ import * as accordion from "@zag-js/accordion"
 import { normalizeProps } from "./utils/normalize-props"
 import { spreadProps } from "./utils/spread-props"
 import { Component } from "./utils/component"
+import { nanoid } from "nanoid"
 
 export class Accordion extends Component<accordion.Context, accordion.Api> {
 
@@ -49,7 +50,7 @@ export class Accordion extends Component<accordion.Context, accordion.Api> {
 export function accordionInit() {
   document.querySelectorAll<HTMLElement>('[data-part="accordion-root"]').forEach((rootEl) => {
     const accordion = new Accordion(rootEl, {
-      id: crypto.randomUUID(),
+      id: nanoid(),
     })
     accordion.init()
   })

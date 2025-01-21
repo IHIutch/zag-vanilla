@@ -3,6 +3,7 @@ import * as dialog from "@zag-js/dialog"
 import { Component } from "./utils/component";
 import { normalizeProps } from "./utils/normalize-props";
 import { spreadProps } from "./utils/spread-props";
+import {nanoid} from "nanoid"
 
 export class Dialog extends Component<dialog.Context, dialog.Api> {
 
@@ -97,7 +98,7 @@ export class Dialog extends Component<dialog.Context, dialog.Api> {
 export function dialogInit() {
   document.querySelectorAll<HTMLElement>('[data-part="dialog-trigger"]').forEach((targetEl) => {
     const dialog = new Dialog(targetEl, {
-      id: crypto.randomUUID(),
+      id: nanoid(),
     })
     dialog.init()
   })

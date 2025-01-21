@@ -2,6 +2,7 @@ import * as splitter from '@zag-js/splitter';
 import { Component } from './utils/component';
 import { spreadProps } from './utils/spread-props';
 import { normalizeProps } from './utils/normalize-props';
+import { nanoid } from 'nanoid';
 
 export class Splitter extends Component<splitter.Context, splitter.Api> {
   initService(context: splitter.Context) {
@@ -54,7 +55,7 @@ export class Splitter extends Component<splitter.Context, splitter.Api> {
 export function splitterInit() {
   document.querySelectorAll<HTMLElement>('[data-part="splitter-root"]').forEach((rootEl) => {
     const splitter = new Splitter(rootEl, {
-      id: crypto.randomUUID(),
+      id: nanoid(),
       orientation: rootEl.getAttribute('data-orientation') === 'vertical' ? 'vertical' : 'horizontal'
     })
     splitter.init()

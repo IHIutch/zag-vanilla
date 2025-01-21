@@ -2,6 +2,7 @@ import * as menu from "@zag-js/menu"
 import { Component } from "./utils/component";
 import { normalizeProps } from "./utils/normalize-props";
 import { spreadProps } from "./utils/spread-props";
+import { nanoid } from "nanoid";
 
 export class Menu extends Component<menu.Context, menu.Api> {
 
@@ -107,7 +108,7 @@ export class Menu extends Component<menu.Context, menu.Api> {
 export function menuInit() {
   document.querySelectorAll<HTMLElement>('[data-part="menu-trigger"]').forEach((targetEl) => {
     const menu = new Menu(targetEl, {
-      id: crypto.randomUUID(),
+      id: nanoid(),
     })
     menu.init()
   })

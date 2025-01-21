@@ -2,6 +2,7 @@ import * as checkbox from "@zag-js/checkbox"
 import { Component } from "./utils/component";
 import { normalizeProps } from "./utils/normalize-props";
 import { spreadProps } from "./utils/spread-props";
+import { nanoid } from "nanoid";
 
 export class Checkbox extends Component<checkbox.Context, checkbox.Api> {
   initService(context: checkbox.Context) {
@@ -46,7 +47,7 @@ export class Checkbox extends Component<checkbox.Context, checkbox.Api> {
 export function checkboxInit() {
   document.querySelectorAll<HTMLElement>('[data-part="checkbox-root"]').forEach((rootEl) => {
     const checkbox = new Checkbox(rootEl, {
-      id: crypto.randomUUID(),
+      id: nanoid(),
     })
     checkbox.init()
   })
