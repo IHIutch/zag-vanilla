@@ -1,10 +1,10 @@
+import { variantGetBracket } from '@unocss/rule-utils'
 import { defineConfig, presetIcons, presetMini, presetUno } from 'unocss'
-import { getBracket, variantGetBracket, variantGetParameter } from '@unocss/rule-utils'
 
 export default defineConfig({
   content: {
     filesystem: [
-      "./src/**/*.html",
+      './src/**/*.html',
     ],
   },
   presets: [
@@ -16,11 +16,12 @@ export default defineConfig({
   ],
   variants: [
     (matcher, ctx) => {
-      const startingStr = "group-state-"
+      const startingStr = 'group-state-'
       if (!matcher.startsWith(startingStr))
         return matcher
       const variant = variantGetBracket(startingStr, matcher, ctx.generator.config.separators)
       if (variant) {
+        // eslint-disable-next-line prefer-const
         let [match, rest] = variant
         if (match.startsWith('[') && match.endsWith(']')) {
           match = match.slice(1, -1)
@@ -32,12 +33,13 @@ export default defineConfig({
       }
     },
     (matcher, ctx) => {
-      const startingStr = "state-"
+      const startingStr = 'state-'
       if (!matcher.startsWith(startingStr))
         return matcher
 
       const variant = variantGetBracket(startingStr, matcher, ctx.generator.config.separators)
       if (variant) {
+        // eslint-disable-next-line prefer-const
         let [match, rest] = variant
         if (match.startsWith('[') && match.endsWith(']')) {
           match = match.slice(1, -1)
@@ -46,16 +48,15 @@ export default defineConfig({
             matcher: `data-[state="${match}"]:${rest}`,
           }
         }
-
       }
     },
-    (matcher, ctx) => {
+    (matcher, _ctx) => {
       if (!matcher.startsWith('highlighted:'))
         return matcher
 
       return {
         matcher: matcher.slice(12),
-        selector: (s) => `${s}[data-highlighted]`,
+        selector: s => `${s}[data-highlighted]`,
       }
     },
   ],

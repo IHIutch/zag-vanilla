@@ -1,18 +1,16 @@
-import * as dialog from "@zag-js/dialog"
-
-import { Component } from "./utils/component";
-import { normalizeProps } from "./utils/normalize-props";
-import { spreadProps } from "./utils/spread-props";
-import {nanoid} from "nanoid"
+import * as dialog from '@zag-js/dialog'
+import { nanoid } from 'nanoid'
+import { Component } from './utils/component'
+import { normalizeProps } from './utils/normalize-props'
+import { spreadProps } from './utils/spread-props'
 
 export class Dialog extends Component<dialog.Context, dialog.Api> {
-
   initService(context: dialog.Context) {
     return dialog.machine({
-      role: this.content.getAttribute('role') === "alertdialog" ? "alertdialog" : "dialog",
+      role: this.content.getAttribute('role') === 'alertdialog' ? 'alertdialog' : 'dialog',
       closeOnEscape: !this.content.hasAttribute('data-static'),
       closeOnInteractOutside: !this.content.hasAttribute('data-static'),
-      ...context
+      ...context,
     })
   }
 
@@ -27,8 +25,10 @@ export class Dialog extends Component<dialog.Context, dialog.Api> {
     this.renderBackdrop(this.backdrop)
     this.renderContent(this.content)
 
-    if (this.title) this.renderTitle(this.title)
-    if (this.description) this.renderDescription(this.description)
+    if (this.title)
+      this.renderTitle(this.title)
+    if (this.description)
+      this.renderDescription(this.description)
     this.closeTriggers.forEach((closeTriggerEl) => {
       this.renderCloseTrigger(closeTriggerEl)
     })
@@ -36,25 +36,30 @@ export class Dialog extends Component<dialog.Context, dialog.Api> {
 
   private get backdrop() {
     const value = this.rootEl.getAttribute('data-target')
-    if (!value) throw new Error("Expected value to be defined")
+    if (!value)
+      throw new Error('Expected value to be defined')
 
     const backdropEl = document.querySelector<HTMLElement>(`[data-part="dialog-backdrop"][data-value="${value}"]`)
-    if (!backdropEl) throw new Error("Expected backdropEl to be defined")
+    if (!backdropEl)
+      throw new Error('Expected backdropEl to be defined')
     return backdropEl
   }
 
   private get positioner() {
     const value = this.rootEl.getAttribute('data-target')
-    if (!value) throw new Error("Expected value to be defined")
+    if (!value)
+      throw new Error('Expected value to be defined')
 
     const positionerEl = document.querySelector<HTMLElement>(`[data-part="dialog-positioner"][data-value="${value}"]`)
-    if (!positionerEl) throw new Error("Expected positionerEl to be defined")
+    if (!positionerEl)
+      throw new Error('Expected positionerEl to be defined')
     return positionerEl
   }
 
   private get content() {
     const contentEl = this.positioner.querySelector<HTMLElement>(`[data-part="dialog-content"]`)
-    if (!contentEl) throw new Error("Expected contentEl to be defined")
+    if (!contentEl)
+      throw new Error('Expected contentEl to be defined')
     return contentEl
   }
 

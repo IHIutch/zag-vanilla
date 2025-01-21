@@ -7,8 +7,8 @@ export default {
 
 export const Basic = {
   render: () => dialogBasic,
-};
+}
 
 export const Static = {
   render: () => dialogStatic,
-};
+}

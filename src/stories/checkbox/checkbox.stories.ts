@@ -7,8 +7,8 @@ export default {
 
 export const Basic = {
   render: () => checkboxBasic,
-};
+}
 
 export const Indeterminate = {
   render: () => checkboxIndeterminate,
-};
+}

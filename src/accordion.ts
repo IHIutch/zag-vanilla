@@ -1,15 +1,14 @@
-import * as accordion from "@zag-js/accordion"
-import { normalizeProps } from "./utils/normalize-props"
-import { spreadProps } from "./utils/spread-props"
-import { Component } from "./utils/component"
-import { nanoid } from "nanoid"
+import * as accordion from '@zag-js/accordion'
+import { nanoid } from 'nanoid'
+import { Component } from './utils/component'
+import { normalizeProps } from './utils/normalize-props'
+import { spreadProps } from './utils/spread-props'
 
 export class Accordion extends Component<accordion.Context, accordion.Api> {
-
   initService(context: accordion.Context) {
     return accordion.machine({
       multiple: this.rootEl.hasAttribute('data-multiple'),
-      ...context
+      ...context,
     })
   }
 
@@ -30,12 +29,15 @@ export class Accordion extends Component<accordion.Context, accordion.Api> {
 
   private renderItem(itemEl: HTMLElement) {
     const value = itemEl.getAttribute('data-value')
-    if (!value) throw new Error("Expected value to be defined")
+    if (!value)
+      throw new Error('Expected value to be defined')
     const itemTriggerEl = itemEl.querySelector<HTMLButtonElement>('[data-part="accordion-trigger"]')
     const itemContentEl = itemEl.querySelector<HTMLElement>('[data-part="accordion-content"]')
 
-    if (!itemTriggerEl) throw new Error("Expected triggerEl to be defined")
-    if (!itemContentEl) throw new Error("Expected contentEl to be defined")
+    if (!itemTriggerEl)
+      throw new Error('Expected triggerEl to be defined')
+    if (!itemContentEl)
+      throw new Error('Expected contentEl to be defined')
     spreadProps(itemEl, this.api.getItemProps({ value }))
     spreadProps(itemTriggerEl, this.api.getItemTriggerProps({ value }))
     spreadProps(itemContentEl, this.api.getItemContentProps({ value }))

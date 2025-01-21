@@ -7,9 +7,8 @@ export default {
 
 export const Horizontal = {
   render: () => splitterHorizontal,
-};
+}
 
 export const Vertical = {
   render: () => splitterVertical,
-};
-
+}

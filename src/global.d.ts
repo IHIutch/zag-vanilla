@@ -1,23 +1,23 @@
-import { Accordion, initAccordions } from "./accordion";
-import { Checkbox } from "./checkbox";
-import { Dialog } from "./dialog";
-import { Splitter } from "./splitter";
+import type { Accordion } from './accordion'
+import type { Checkbox } from './checkbox'
+import type { Dialog } from './dialog'
+import type { Splitter } from './splitter'
 
 declare global {
   interface Window {
     Accordion: typeof Accordion
-    accordionInit: () => void;
+    accordionInit: () => void
     //
     Checkbox: typeof Checkbox
-    checkboxInit: () => void;
+    checkboxInit: () => void
     //
     Dialog: typeof Dialog
-    dialogInit: () => void;
+    dialogInit: () => void
     //
     Menu: typeof Menu
-    menuInit: () => void;
+    menuInit: () => void
     //
     Splitter: typeof Splitter
-    splitterInit: () => void;
+    splitterInit: () => void
   }
 }

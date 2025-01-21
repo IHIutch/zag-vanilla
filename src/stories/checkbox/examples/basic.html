@@ -1,5 +1,8 @@
 <div>
-  <label data-part="checkbox-root" class="flex gap-2 items-center">
+  <label
+    data-part="checkbox-root"
+    class="flex gap-2 items-center"
+  >
     <div
       data-part="checkbox-control"
       class="size-4 text-white flex items-center justify-center border border-solid text-gray-500 border-gray-600 state-[indeterminate]:border-blue-600 state-[checked]:border-blue-600 state-[indeterminate]:bg-blue-600 state-[unchecked]:bg-white state-[checked]:bg-blue-600"
@@ -9,15 +12,14 @@
         aria-hidden="true"
         class="size-4 flex items-center justify-center group"
       >
-        <div
-          class="hidden i-material-symbols:check size-full group-state-[checked]:block"
-        ></div>
-        <div
-          class="hidden i-material-symbols:check-indeterminate-small size-full state-[indeterminate]:block"
-        ></div>
+        <div class="hidden i-material-symbols:check size-full group-state-[checked]:block"></div>
+        <div class="hidden i-material-symbols:check-indeterminate-small size-full state-[indeterminate]:block"></div>
       </div>
     </div>
-    <input type="checkbox" data-part="checkbox-input" />
+    <input
+      type="checkbox"
+      data-part="checkbox-input"
+    />
     <span data-part="checkbox-label">Checkbox Input</span>
   </label>
 </div>

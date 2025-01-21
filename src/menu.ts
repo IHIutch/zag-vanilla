@@ -1,12 +1,11 @@
-import * as menu from "@zag-js/menu"
-import { Component } from "./utils/component";
-import { normalizeProps } from "./utils/normalize-props";
-import { spreadProps } from "./utils/spread-props";
-import { nanoid } from "nanoid";
+import * as menu from '@zag-js/menu'
+import { nanoid } from 'nanoid'
+import { Component } from './utils/component'
+import { normalizeProps } from './utils/normalize-props'
+import { spreadProps } from './utils/spread-props'
 
 export class Menu extends Component<menu.Context, menu.Api> {
-
-  private checkedState: Map<string, boolean> = new Map();
+  private checkedState: Map<string, boolean> = new Map()
 
   initService(context: menu.Context) {
     return menu.machine(context)
@@ -28,16 +27,19 @@ export class Menu extends Component<menu.Context, menu.Api> {
 
   private get positioner() {
     const value = this.rootEl.getAttribute('data-target')
-    if (!value) throw new Error("Expected value to be defined")
+    if (!value)
+      throw new Error('Expected value to be defined')
 
     const positionerEl = document.querySelector<HTMLElement>(`[data-part="menu-positioner"][data-value="${value}"]`)
-    if (!positionerEl) throw new Error("Expected positionerEl to be defined")
+    if (!positionerEl)
+      throw new Error('Expected positionerEl to be defined')
     return positionerEl
   }
 
   private get content() {
     const contentEl = this.positioner.querySelector<HTMLElement>(`[data-part="menu-content"]`)
-    if (!contentEl) throw new Error("Expected contentEl to be defined")
+    if (!contentEl)
+      throw new Error('Expected contentEl to be defined')
     return contentEl
   }
 
@@ -55,14 +57,15 @@ export class Menu extends Component<menu.Context, menu.Api> {
 
   private renderItem(itemEl: HTMLElement) {
     const value = itemEl.getAttribute('data-value')
-    if (!value) throw new Error("Expected value to be defined")
+    if (!value)
+      throw new Error('Expected value to be defined')
 
     const checked = this.checkedState.get(value) || false
     const disabled = itemEl.hasAttribute('disabled') || itemEl.hasAttribute('data-disabled')
     const valueText = itemEl.getAttribute('data-valueText') || undefined
     const closeOnSelect = itemEl.hasAttribute('data-closeOnSelect')
 
-    const type = itemEl.getAttribute('data-type');
+    const type = itemEl.getAttribute('data-type')
     if (type === 'checkbox' || type === 'radio') {
       spreadProps(itemEl, this.api.getOptionItemProps({
         type,
@@ -73,27 +76,31 @@ export class Menu extends Component<menu.Context, menu.Api> {
         checked,
         onCheckedChange: (checked) => {
           if (type === 'radio') {
-            this.checkedState.clear();
+            this.checkedState.clear()
           }
-          this.checkedState.set(value, checked);
+          this.checkedState.set(value, checked)
         },
       }))
 
       const itemIndicatorEl = itemEl.querySelector<HTMLElement>('[data-part="menu-item-indicator"]')
-      if (itemIndicatorEl) spreadProps(itemIndicatorEl, this.api.getItemIndicatorProps({
-        checked,
-        type,
-        value
-      }))
+      if (itemIndicatorEl) {
+        spreadProps(itemIndicatorEl, this.api.getItemIndicatorProps({
+          checked,
+          type,
+          value,
+        }))
+      }
 
       const itemTextEl = itemEl.querySelector<HTMLElement>('[data-part="menu-item-text"]')
-      if (itemTextEl) spreadProps(itemTextEl, this.api.getItemTextProps({
-        checked,
-        type,
-        value
-      }))
-
-    } else {
+      if (itemTextEl) {
+        spreadProps(itemTextEl, this.api.getItemTextProps({
+          checked,
+          type,
+          value,
+        }))
+      }
+    }
+    else {
       spreadProps(itemEl, this.api.getItemProps({
         value,
         disabled,
@@ -101,7 +108,6 @@ export class Menu extends Component<menu.Context, menu.Api> {
         closeOnSelect,
       }))
     }
-
   }
 }
 
