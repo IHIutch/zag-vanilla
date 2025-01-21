@@ -1,4 +1,5 @@
 import { accordionInit } from './accordion.ts'
+import { avatarInit } from './avatar.ts'
 import { checkboxInit } from './checkbox.ts'
 import { dialogInit } from './dialog.ts'
 import { menuInit } from './menu.ts'
@@ -10,4 +11,5 @@ document.addEventListener('DOMContentLoaded', () => {
   menuInit()
   splitterInit()
   dialogInit()
+  avatarInit()
 })
