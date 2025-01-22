@@ -35,6 +35,9 @@ importers:
       '@zag-js/checkbox':
         specifier: ^0.82.0
         version: 0.82.0
+      '@zag-js/collapsible':
+        specifier: ^0.82.0
+        version: 0.82.0
       '@zag-js/core':
         specifier: ^0.82.0
         version: 0.82.0
@@ -1277,6 +1280,9 @@ packages:
 
   '@zag-js/checkbox@0.82.0':
     resolution: {integrity: sha512-uqsAg2r2RgU6QWPUaCVI4Sb2W1Ff53Yr6GWUF6pcBlu7OrfNyJOR6Z2fVOYn8MdwI4l8zzrzdSGQXaT4xnrfCQ==}
+
+  '@zag-js/collapsible@0.82.0':
+    resolution: {integrity: sha512-OkXjLybtOIZS6iq6vOOlGF2wlOsNOB5b5GUDnvdbbCd73bKZ85fleVX+LUPiLz0IJIl5zyeWJSZNFKDke8Riig==}
 
   '@zag-js/core@0.82.0':
     resolution: {integrity: sha512-iv2Ji3IfdRoe92ud+WoH5JHh8J2af56LlpNad9Ndga5+KWjfrXvHI1sGwP/WMU+6ArkuQbuBa80iESog01Ez5Q==}
@@ -4290,6 +4296,14 @@ snapshots:
       '@zag-js/core': 0.82.0
       '@zag-js/dom-query': 0.82.0
       '@zag-js/focus-visible': 0.82.0
+      '@zag-js/types': 0.82.0
+      '@zag-js/utils': 0.82.0
+
+  '@zag-js/collapsible@0.82.0':
+    dependencies:
+      '@zag-js/anatomy': 0.82.0
+      '@zag-js/core': 0.82.0
+      '@zag-js/dom-query': 0.82.0
       '@zag-js/types': 0.82.0
       '@zag-js/utils': 0.82.0
 

@@ -1,0 +1,36 @@
+<div>
+  <!-- <button id="hello">test</button> -->
+  <div class="mb-4">
+    <button
+      data-part="collapsible-trigger"
+      data-target="one"
+      id="blah"
+      class="flex items-center gap-2 bg-white hover:bg-gray-100 border border-solid border-gray-300 h-10 px-3 rounded"
+    >
+      Click to Toggle
+    </button>
+  </div>
+  <div
+    data-part="collapsible-content"
+    data-value="one"
+  >
+    <p class="border border-solid border-gray-300 p-4 rounded">
+      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Minus eaque non adipisci ea, excepturi asperiores
+      aliquam autem voluptatem temporibus fuga qui doloribus hic voluptas suscipit doloremque? Nesciunt veritatis
+      ratione neque.
+    </p>
+  </div>
+</div>
+
+<!-- <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const toggle = document.getElementById('collapsible:blah:trigger')
+    const instance = Collapsible.getInstance(toggle)
+
+    console.log({ instance })
+
+    document.getElementById('hello').addEventListener('click', () => {
+      instance.toggle()
+    })
+  })
+</script> -->
