@@ -1,0 +1,53 @@
+<div
+  id="test"
+  data-part="clipboard-root"
+  data-value="https://example-two.com"
+>
+  <label
+    data-part="clipboard-label"
+    class="block mb-1"
+    >Copy this link</label
+  >
+  <div
+    data-part="clipboard-control"
+    class="flex gap-2"
+  >
+    <input
+      class="flex items-center bg-white border border-solid border-gray-300 h-10 px-3 rounded"
+      data-part="clipboard-input"
+      type="text"
+    />
+    <button
+      data-part="clipboard-trigger"
+      class="flex items-center justify-center bg-white hover:bg-gray-100 border border-solid border-gray-300 size-10 rounded group"
+    >
+      <div
+        aria-hidden="true"
+        class="i-lucide:check size-4.5 hidden group-[[data-copied]]:block"
+      ></div>
+      <div
+        aria-hidden="true"
+        class="i-lucide:clipboard-copy size-4.5 group-[[data-copied]]:hidden"
+      ></div>
+    </button>
+  </div>
+
+  <!-- <input
+    type="text"
+    id="test"
+    value="change me"
+  />
+  <button id="button">Update</button> -->
+</div>
+
+<!-- <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const rootEl = document.getElementById('clip:test')
+    const instance = Clipboard.getInstance(rootEl)
+
+    document.getElementById('button').addEventListener('click', () => {
+      const inputEl = document.getElementById('test')
+      instance.setValue(inputEl.value)
+    })
+  })
+</script> -->

@@ -2,6 +2,7 @@ import type { Accordion } from './components/accordion'
 import type { Avatar } from './components/avatar'
 import type { Carousel } from './components/carousel'
 import type { Checkbox } from './components/checkbox'
+import type { Clipboard } from './components/clipboard'
 import type { Collapsible } from './components/collapsible'
 import type { Dialog } from './components/dialog'
 import type { Menu } from './components/menu'
@@ -20,6 +21,9 @@ declare global {
     //
     Checkbox: typeof Checkbox
     checkboxInit: () => void
+    //
+    Clipboard: typeof Clipboard
+    clipboardInit: () => void
     //
     Collapsible: typeof Collapsible
     collapsibleInit: () => void
