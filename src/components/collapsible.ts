@@ -8,9 +8,21 @@ import { spreadProps } from '../utils/spread-props'
 export class Collapsible extends Component<collapsible.Context, collapsible.Api> {
   initService(context: collapsible.Context) {
     Collapsible.instances.push(this)
+
     return collapsible.machine({
       disabled: this.rootEl.hasAttribute('disabled') || this.rootEl.hasAttribute('data-disabled'),
       dir: this.rootEl.getAttribute('data-dir') === 'rtl' ? 'rtl' : 'ltr',
+      open: this.rootEl.hasAttribute('data-open'),
+      onOpenChange: (details) => {
+        const event = new CustomEvent('onOpenChange', {
+          detail: details,
+        })
+        this.rootEl.dispatchEvent(event)
+      },
+      onExitComplete: () => {
+        const event = new CustomEvent('onExitComplete')
+        this.rootEl.dispatchEvent(event)
+      },
       ...context,
     })
   }
@@ -64,9 +76,6 @@ export function collapsibleInit() {
       id: rootEl.id || nanoid(),
     })
     collapsible.init()
-    // rootEl.prototype.setOpen = function (val) {
-    //   collapsible.api.setOpen(val)
-    // }
   })
 }
 

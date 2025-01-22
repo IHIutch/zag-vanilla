@@ -27,7 +27,9 @@
     const toggle = document.getElementById('collapsible:blah:trigger')
     const instance = Collapsible.getInstance(toggle)
 
-    console.log({ instance })
+    toggle.addEventListener('onOpenChange', (event) => {
+      console.log('onOpenChange', event)
+    })
 
     document.getElementById('hello').addEventListener('click', () => {
       instance.toggle()
