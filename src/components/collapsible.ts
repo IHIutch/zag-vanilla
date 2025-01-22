@@ -6,6 +6,12 @@ import { normalizeProps } from '../utils/normalize-props'
 import { spreadProps } from '../utils/spread-props'
 
 export class Collapsible extends Component<collapsible.Context, collapsible.Api> {
+  static instances: Collapsible[] = []
+
+  static getInstance(element: HTMLElement) {
+    return Collapsible.instances.find(instance => instance.rootEl === element)
+  }
+
   initService(context: collapsible.Context) {
     Collapsible.instances.push(this)
 
@@ -49,12 +55,6 @@ export class Collapsible extends Component<collapsible.Context, collapsible.Api>
 
   private renderContent(contentEl: HTMLElement) {
     spreadProps(contentEl, this.api.getContentProps())
-  }
-
-  static instances: Collapsible[] = []
-
-  static getInstance(element: HTMLElement) {
-    return Collapsible.instances.find(instance => instance.rootEl === element)
   }
 
   show() {

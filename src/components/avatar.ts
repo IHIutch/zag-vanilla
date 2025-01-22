@@ -14,13 +14,12 @@ export class Avatar extends Component<avatar.Context, avatar.Api> {
   }
 
   render() {
-    const rootEl = this.rootEl
     spreadProps(this.rootEl, this.api.getRootProps())
 
-    const imageEl = rootEl.querySelector<HTMLElement>('[data-part="avatar-image"]')
+    const imageEl = this.rootEl.querySelector<HTMLElement>('[data-part="avatar-image"]')
     if (imageEl)
       spreadProps(imageEl, this.api.getImageProps())
-    const fallbackEl = rootEl.querySelector<HTMLElement>('[data-part="avatar-fallback"]')
+    const fallbackEl = this.rootEl.querySelector<HTMLElement>('[data-part="avatar-fallback"]')
     if (fallbackEl)
       spreadProps(fallbackEl, this.api.getFallbackProps())
   }
