@@ -41,6 +41,9 @@ importers:
       '@zag-js/collapsible':
         specifier: ^0.82.0
         version: 0.82.0
+      '@zag-js/combobox':
+        specifier: 0.82.0
+        version: 0.82.0
       '@zag-js/core':
         specifier: ^0.82.0
         version: 0.82.0
@@ -1289,6 +1292,12 @@ packages:
 
   '@zag-js/collapsible@0.82.0':
     resolution: {integrity: sha512-OkXjLybtOIZS6iq6vOOlGF2wlOsNOB5b5GUDnvdbbCd73bKZ85fleVX+LUPiLz0IJIl5zyeWJSZNFKDke8Riig==}
+
+  '@zag-js/collection@0.82.0':
+    resolution: {integrity: sha512-NpMNOkJmU5pgDy8pl7F0l6fOyMjo/ui8uub0hU7V2b20kjXX9DFHkD3dneJqzwgexeNNq9A1SY3z/ULVjLhQRA==}
+
+  '@zag-js/combobox@0.82.0':
+    resolution: {integrity: sha512-+Ptw3bGN3lrhxox4cMnh+qjHQ+LLwPwXu8G05+zWSCtLrCcvGDZOTlEGiKBrKuVdsLx0s31jmFwrlpVF+F/JPg==}
 
   '@zag-js/core@0.82.0':
     resolution: {integrity: sha512-iv2Ji3IfdRoe92ud+WoH5JHh8J2af56LlpNad9Ndga5+KWjfrXvHI1sGwP/WMU+6ArkuQbuBa80iESog01Ez5Q==}
@@ -4318,6 +4327,22 @@ snapshots:
       '@zag-js/anatomy': 0.82.0
       '@zag-js/core': 0.82.0
       '@zag-js/dom-query': 0.82.0
+      '@zag-js/types': 0.82.0
+      '@zag-js/utils': 0.82.0
+
+  '@zag-js/collection@0.82.0':
+    dependencies:
+      '@zag-js/utils': 0.82.0
+
+  '@zag-js/combobox@0.82.0':
+    dependencies:
+      '@zag-js/anatomy': 0.82.0
+      '@zag-js/aria-hidden': 0.82.0
+      '@zag-js/collection': 0.82.0
+      '@zag-js/core': 0.82.0
+      '@zag-js/dismissable': 0.82.0
+      '@zag-js/dom-query': 0.82.0
+      '@zag-js/popper': 0.82.0
       '@zag-js/types': 0.82.0
       '@zag-js/utils': 0.82.0
 

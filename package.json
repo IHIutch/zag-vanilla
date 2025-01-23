@@ -23,6 +23,7 @@
     "@zag-js/checkbox": "^0.82.0",
     "@zag-js/clipboard": "^0.82.0",
     "@zag-js/collapsible": "^0.82.0",
+    "@zag-js/combobox": "0.82.0",
     "@zag-js/core": "^0.82.0",
     "@zag-js/dialog": "^0.82.0",
     "@zag-js/dom-event": "^0.80.0",

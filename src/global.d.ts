@@ -4,6 +4,7 @@ import type { Carousel } from './components/carousel'
 import type { Checkbox } from './components/checkbox'
 import type { Clipboard } from './components/clipboard'
 import type { Collapsible } from './components/collapsible'
+import type { Combobox } from './components/combobox'
 import type { Dialog } from './components/dialog'
 import type { Menu } from './components/menu'
 import type { Splitter } from './components/splitter'
@@ -27,6 +28,9 @@ declare global {
     //
     Collapsible: typeof Collapsible
     collapsibleInit: () => void
+    //
+    Combobox: typeof Combobox
+    comboboxInit: () => void
     //
     Dialog: typeof Dialog
     dialogInit: () => void

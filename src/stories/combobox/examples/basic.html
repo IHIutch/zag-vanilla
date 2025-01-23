@@ -1,0 +1,55 @@
+<div
+  data-part="combobox-root"
+  class="relative"
+>
+  <label
+    data-part="combobox-label"
+    class="block mb-1"
+    >Select an option</label
+  >
+  <div class="relative flex items-center">
+    <input
+      data-part="combobox-input"
+      class="w-full h-10 pl-3 pr-11 border border-solid border-gray-300 rounded"
+      type="text"
+    />
+    <div class="absolute right-1 top-0 flex items-center h-full">
+      <button
+        data-part="combobox-trigger"
+        class="flex items-center justify-center bg-white hover:bg-gray-100 border border-solid border-gray-300 size-8 rounded"
+      >
+        <div
+          aria-hidden="true"
+          class="i-lucide:chevron-down size-4.5"
+        ></div>
+      </button>
+    </div>
+  </div>
+  <ul
+    data-part="combobox-content"
+    class="border border-solid border-gray-300 rounded overflow-hidden shadow-lg mt-1"
+  >
+    <li
+      data-part="combobox-item"
+      data-value="one"
+      class="w-full py-2 px-3 data-[highlighted]:bg-gray-100 cursor-pointer"
+    >
+      One
+    </li>
+    <li
+      data-part="combobox-item"
+      data-value="two"
+      class="w-full py-2 px-3 data-[highlighted]:bg-gray-100 cursor-pointer"
+    >
+      Two
+    </li>
+    <li
+      data-part="combobox-item"
+      data-value="three"
+      data-disabled
+      class="w-full py-2 px-3 data-[highlighted]:bg-gray-100 cursor-pointer"
+    >
+      Three
+    </li>
+  </ul>
+</div>
