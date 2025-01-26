@@ -6,14 +6,14 @@ import { normalizeProps } from '../utils/normalize-props'
 import { spreadProps } from '../utils/spread-props'
 
 export class Collapsible extends Component<collapsible.Context, collapsible.Api> {
-  static instances: Collapsible[] = []
+  static instances: Map<string, Collapsible> = new Map()
 
-  static getInstance(element: HTMLElement) {
-    return Collapsible.instances.find(instance => instance.rootEl === element)
+  static getInstance(id: string) {
+    return Collapsible.instances.get(id)
   }
 
   initService(context: collapsible.Context) {
-    Collapsible.instances.push(this)
+    Collapsible.instances.set(context.id, this)
 
     return collapsible.machine({
       disabled: this.rootEl.hasAttribute('disabled') || this.rootEl.hasAttribute('data-disabled'),

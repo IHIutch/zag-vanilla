@@ -13,14 +13,14 @@ const COMBOBOX_CONTENT_SELECTOR = '[data-part="combobox-content"]'
 const COMBOBOX_ITEM_SELECTOR = '[data-part="combobox-item"]'
 
 export class Combobox extends Component<zagCombobox.Context, zagCombobox.Api> {
-  static instances: Combobox[] = []
+  static instances: Map<string, Combobox> = new Map()
 
-  static getInstance(element: HTMLElement) {
-    return Combobox.instances.find(instance => instance.rootEl === element)
+  static getInstance(id: string) {
+    return Combobox.instances.get(id)
   }
 
   initService(context: zagCombobox.Context) {
-    Combobox.instances.push(this)
+    Combobox.instances.set(context.id, this)
 
     return zagCombobox.machine({
       ...context,

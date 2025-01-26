@@ -6,14 +6,14 @@ import { normalizeProps } from '../utils/normalize-props'
 import { spreadProps } from '../utils/spread-props'
 
 export class Clipboard extends Component<clipboard.Context, clipboard.Api> {
-  static instances: Clipboard[] = []
+  static instances: Map<string, Clipboard> = new Map()
 
-  static getInstance(element: HTMLElement) {
-    return Clipboard.instances.find(instance => instance.rootEl === element)
+  static getInstance(id: string) {
+    return Clipboard.instances.get(id)
   }
 
   initService(context: clipboard.Context) {
-    Clipboard.instances.push(this)
+    Clipboard.instances.set(context.id, this)
 
     return clipboard.machine({
       value: this.rootEl.getAttribute('data-value') || '',
