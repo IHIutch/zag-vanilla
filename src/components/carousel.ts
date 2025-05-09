@@ -114,7 +114,7 @@ export class ZagCarousel extends Component<carousel.Props, carousel.Api> {
 export function carouselInit() {
   queryAll(document, '[data-part="carousel-root"]').forEach((rootEl) => {
     const carousel = new ZagCarousel(rootEl, {
-      id: nanoid(),
+      id: rootEl.id || nanoid(),
       slideCount: rootEl.querySelectorAll<HTMLElement>('[data-part="item"]').length,
     })
     carousel.init()

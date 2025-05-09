@@ -31,7 +31,7 @@ export class ZagAvatar extends Component<avatar.Props, avatar.Api> {
 export function avatarInit() {
   document.querySelectorAll<HTMLElement>('[data-part="avatar-root"]').forEach((rootEl) => {
     const avatar = new ZagAvatar(rootEl, {
-      id: nanoid(),
+      id: rootEl.id || nanoid(),
     })
     avatar.init()
   })

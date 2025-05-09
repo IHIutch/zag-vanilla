@@ -101,7 +101,7 @@ export class ZagCombobox extends Component<combobox.Props, combobox.Api> {
 export function comboboxInit() {
   queryAll(document, COMBOBOX_ROOT_SELECTOR).forEach((rootEl) => {
     const combobox = new ZagCombobox(rootEl, {
-      id: nanoid(),
+      id: rootEl.id || nanoid(),
     })
     combobox.init()
   })

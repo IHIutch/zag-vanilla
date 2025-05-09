@@ -62,7 +62,7 @@ export function splitterInit() {
   document.querySelectorAll<HTMLElement>('[data-part="splitter-root"]').forEach((rootEl) => {
     const panelEls = Array.from(rootEl.querySelectorAll<HTMLElement>('[data-part="splitter-panel"]'))
     const splitter = new ZagSplitter(rootEl, {
-      id: nanoid(),
+      id: rootEl.id || nanoid(),
       panels: panelEls.map(panelEl => ({
         id: panelEl.getAttribute('data-value') || '',
       })),

@@ -1,5 +1,4 @@
 import * as dialog from '@zag-js/dialog'
-import { nanoid } from 'nanoid'
 import { Component } from '../utils/component'
 import { VanillaMachine } from '../utils/machine'
 import { normalizeProps } from '../utils/normalize-props'
@@ -103,8 +102,12 @@ export class ZagDialog extends Component<dialog.Props, dialog.Api> {
 
 export function dialogInit() {
   document.querySelectorAll<HTMLElement>('[data-part="dialog-trigger"]').forEach((targetEl) => {
+    const value = targetEl.getAttribute('data-target')
+    if (!value)
+      throw new Error('Expected [data-target] to be defined')
+
     const dialog = new ZagDialog(targetEl, {
-      id: nanoid(),
+      id: value,
     })
     dialog.init()
   })

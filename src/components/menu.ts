@@ -1,5 +1,4 @@
 import * as menu from '@zag-js/menu'
-import { nanoid } from 'nanoid'
 import { Component } from '../utils/component'
 import { VanillaMachine } from '../utils/machine'
 import { normalizeProps } from '../utils/normalize-props'
@@ -116,8 +115,11 @@ export class ZagMenu extends Component<menu.Props, menu.Api> {
 
 export function menuInit() {
   document.querySelectorAll<HTMLElement>('[data-part="menu-trigger"]').forEach((targetEl) => {
+    const value = targetEl.getAttribute('data-target')
+    if (!value)
+      throw new Error('Expected [data-target] to be defined')
     const menu = new ZagMenu(targetEl, {
-      id: nanoid(),
+      id: value,
     })
     menu.init()
   })

@@ -53,7 +53,7 @@ export class ZagAccordion extends Component<accordion.Props, accordion.Api> {
 export function accordionInit() {
   document.querySelectorAll<HTMLElement>('[data-part="accordion-root"]').forEach((rootEl) => {
     const accordion = new ZagAccordion(rootEl, {
-      id: nanoid(),
+      id: rootEl.id || nanoid(),
     })
     accordion.init()
   })

@@ -8,10 +8,10 @@ import { spreadProps } from '../utils/spread-props'
 export class ZagCheckbox extends Component<checkbox.Props, checkbox.Api> {
   initMachine(context: checkbox.Props) {
     return new VanillaMachine(checkbox.machine, {
+      ...context,
       name: this.input.getAttribute('name') || undefined,
       checked: this.input.hasAttribute('indeterminate') ? 'indeterminate' : this.input.checked,
       disabled: this.input.disabled,
-      ...context,
     })
   }
 
@@ -51,7 +51,7 @@ export class ZagCheckbox extends Component<checkbox.Props, checkbox.Api> {
 export function checkboxInit() {
   document.querySelectorAll<HTMLElement>('[data-part="checkbox-root"]').forEach((rootEl) => {
     const checkbox = new ZagCheckbox(rootEl, {
-      id: nanoid(),
+      id: rootEl.id || nanoid(),
     })
     checkbox.init()
   })
