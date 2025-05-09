@@ -33,8 +33,8 @@ export class ZagDialog extends Component<dialog.Props, dialog.Api> {
   render() {
     spreadProps(this.rootEl, this.api.getTriggerProps())
 
-    this.renderPositioner(this.positioner)
     this.renderBackdrop(this.backdrop)
+    this.renderPositioner(this.positioner)
     this.renderContent(this.content)
 
     if (this.title)
@@ -88,6 +88,7 @@ export class ZagDialog extends Component<dialog.Props, dialog.Api> {
   }
 
   private renderBackdrop(backdropEl: HTMLElement) {
+    document.body.appendChild(backdropEl)
     spreadProps(backdropEl, this.api.getBackdropProps())
   }
 
