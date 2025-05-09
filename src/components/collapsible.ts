@@ -21,9 +21,9 @@ export class ZagCollapsible extends Component<collapsible.Props, collapsible.Api
       disabled: this.rootEl.hasAttribute('disabled') || this.rootEl.hasAttribute('data-disabled'),
       dir: this.rootEl.getAttribute('data-dir') === 'rtl' ? 'rtl' : 'ltr',
       open: this.rootEl.hasAttribute('data-open'),
-      onOpenChange: (details) => {
+      onOpenChange: (detail) => {
         const event = new CustomEvent('onOpenChange', {
-          detail: details,
+          detail,
         })
         this.rootEl.dispatchEvent(event)
       },
