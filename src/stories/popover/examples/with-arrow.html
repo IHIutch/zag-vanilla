@@ -1,0 +1,61 @@
+<div class="flex justify-center">
+  <button
+    data-part="popover-trigger"
+    data-target="popover"
+    class="flex items-center gap-2 bg-white hover:bg-gray-100 border border-solid border-gray-300 h-10 px-3 rounded"
+  >
+    Click me
+  </button>
+  <div
+    data-part="popover-positioner"
+    data-value="popover"
+  >
+    <div
+      data-part="popover-content"
+      class="bg-white border border-gray-300 shadow-sm rounded p-2 max-w-xs w-full"
+      style="
+        --arrow-size: 8px;
+        --arrow-size-half: calc(var(--arrow-size) / 2);
+        --arrow-offset: calc(var(--arrow-size-half) * -1);
+      "
+    >
+      <div
+        data-part="popover-arrow"
+        class="top-[var(--arrow-offset)] left-1/2 translate-x-[-50%] translate-y-[-calc(var(--arrow-size) / 2)]"
+      >
+        <div
+          data-part="popover-arrow-tip"
+          class="bg-white border-t border-l border-gray-300 rotate-45"
+        ></div>
+      </div>
+      <div class="mb-4">
+        <p
+          data-part="popover-title"
+          class="font-bold mb-2"
+        >
+          About Tabs
+        </p>
+        <p data-part="popover-description">
+          Tabs are used to organize and group content into sections that the user can navigate between.
+        </p>
+      </div>
+      <button
+        type="button"
+        class="flex items-center gap-2 bg-white hover:bg-gray-100 border border-solid border-gray-300 h-10 px-3 rounded focus:outline focus:outline-2 focus:outline-blue-500 focus:outline-offset-2"
+      >
+        Action Button
+      </button>
+      <button
+        type="button"
+        class="text-black flex justify-center items-center bg-gray-100 hover:bg-gray-200 size-8 rounded absolute top-3 right-3"
+        data-part="popover-close-trigger"
+      >
+        <span class="sr-only">Close modal</span>
+        <div
+          aria-hidden="true"
+          class="i-material-symbols:close size-6"
+        ></div>
+      </button>
+    </div>
+  </div>
+</div>

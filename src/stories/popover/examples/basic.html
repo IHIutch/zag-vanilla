@@ -1,0 +1,33 @@
+<div class="flex justify-center">
+  <button
+    data-part="popover-trigger"
+    data-target="popover"
+    class="flex items-center gap-2 bg-white hover:bg-gray-100 border border-solid border-gray-300 h-10 px-3 rounded"
+  >
+    Click me
+  </button>
+  <div
+    data-part="popover-positioner"
+    data-value="popover"
+  >
+    <div
+      data-part="popover-content"
+      class="bg-white border border-gray-300 shadow-sm rounded p-2"
+    >
+      <div data-part="popover-title">Presenters</div>
+      <div data-part="popover-description">Description</div>
+      <button>Action Button</button>
+      <button
+        type="button"
+        class="text-black flex justify-center items-center bg-gray-100 hover:bg-gray-200 size-8 rounded absolute top-3 right-3"
+        data-part="popover-close-trigger"
+      >
+        <span class="sr-only">Close modal</span>
+        <div
+          aria-hidden="true"
+          class="i-material-symbols:close size-6"
+        ></div>
+      </button>
+    </div>
+  </div>
+</div>

@@ -8,6 +8,7 @@ import { comboboxInit } from './components/combobox.ts'
 import { dialogInit } from './components/dialog.ts'
 import { menuInit } from './components/menu.ts'
 import { pinInputInit } from './components/pin-input.ts'
+import { popoverInit } from './components/popover.ts'
 import { splitterInit } from './components/splitter.ts'
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -22,4 +23,5 @@ document.addEventListener('DOMContentLoaded', () => {
   menuInit()
   splitterInit()
   pinInputInit()
+  popoverInit()
 })
