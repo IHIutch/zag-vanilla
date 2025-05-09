@@ -2,22 +2,23 @@ import * as carousel from '@zag-js/carousel'
 import { query, queryAll } from '@zag-js/dom-query'
 import { nanoid } from 'nanoid'
 import { Component } from '../utils/component'
+import { VanillaMachine } from '../utils/machine'
 import { normalizeProps } from '../utils/normalize-props'
 import { spreadProps } from '../utils/spread-props'
 
-export class Carousel extends Component<carousel.Context, carousel.Api> {
-  initService(context: carousel.Context) {
-    return carousel.machine({
+export class ZagCarousel extends Component<carousel.Props, carousel.Api> {
+  initMachine(context: carousel.Props) {
+    return new VanillaMachine(carousel.machine, {
+      ...context,
       slideCount: this.items.length,
       loop: this.rootEl.hasAttribute('data-loop') || false,
       spacing: this.rootEl.getAttribute('data-spacing') || undefined,
       allowMouseDrag: this.rootEl.hasAttribute('data-allowMouseDrag') || false,
-      ...context,
     })
   }
 
   initApi() {
-    return carousel.connect(this.service.state, this.service.send, normalizeProps)
+    return carousel.connect(this.machine.service, normalizeProps)
   }
 
   render() {
@@ -112,14 +113,15 @@ export class Carousel extends Component<carousel.Context, carousel.Api> {
 
 export function carouselInit() {
   queryAll(document, '[data-part="carousel-root"]').forEach((rootEl) => {
-    const carousel = new Carousel(rootEl, {
+    const carousel = new ZagCarousel(rootEl, {
       id: nanoid(),
+      slideCount: rootEl.querySelectorAll<HTMLElement>('[data-part="item"]').length,
     })
     carousel.init()
   })
 }
 
 if (typeof window !== 'undefined') {
-  window.Carousel = Carousel
+  window.ZagCarousel = ZagCarousel
   window.carouselInit = carouselInit
 }

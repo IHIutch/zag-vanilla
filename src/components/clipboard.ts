@@ -2,28 +2,29 @@ import * as clipboard from '@zag-js/clipboard'
 import { query } from '@zag-js/dom-query'
 import { nanoid } from 'nanoid'
 import { Component } from '../utils/component'
+import { VanillaMachine } from '../utils/machine'
 import { normalizeProps } from '../utils/normalize-props'
 import { spreadProps } from '../utils/spread-props'
 
-export class Clipboard extends Component<clipboard.Context, clipboard.Api> {
-  static instances: Map<string, Clipboard> = new Map()
+export class ZagClipboard extends Component<clipboard.Props, clipboard.Api> {
+  static instances: Map<string, ZagClipboard> = new Map()
 
   static getInstance(id: string) {
-    return Clipboard.instances.get(id)
+    return ZagClipboard.instances.get(id)
   }
 
-  initService(context: clipboard.Context) {
-    Clipboard.instances.set(context.id, this)
+  initMachine(context: clipboard.Props) {
+    ZagClipboard.instances.set(context.id, this)
 
-    return clipboard.machine({
+    return new VanillaMachine(clipboard.machine, {
+      ...context,
       value: this.rootEl.getAttribute('data-value') || '',
       timeout: Number(this.rootEl.getAttribute('data-timeout') || 3000),
-      ...context,
     })
   }
 
   initApi() {
-    return clipboard.connect(this.service.state, this.service.send, normalizeProps)
+    return clipboard.connect(this.machine.service, normalizeProps)
   }
 
   render() {
@@ -74,7 +75,7 @@ export class Clipboard extends Component<clipboard.Context, clipboard.Api> {
 
 export function clipboardInit() {
   document.querySelectorAll<HTMLElement>('[data-part="clipboard-root"]').forEach((rootEl) => {
-    const clipboard = new Clipboard(rootEl, {
+    const clipboard = new ZagClipboard(rootEl, {
       id: rootEl.id || nanoid(),
     })
     clipboard.init()
@@ -82,6 +83,6 @@ export function clipboardInit() {
 }
 
 if (typeof window !== 'undefined') {
-  window.Clipboard = Clipboard
+  window.ZagClipboard = ZagClipboard
   window.clipboardInit = clipboardInit
 }

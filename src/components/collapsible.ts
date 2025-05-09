@@ -2,20 +2,22 @@ import * as collapsible from '@zag-js/collapsible'
 import { query, queryAll } from '@zag-js/dom-query'
 import { nanoid } from 'nanoid'
 import { Component } from '../utils/component'
+import { VanillaMachine } from '../utils/machine'
 import { normalizeProps } from '../utils/normalize-props'
 import { spreadProps } from '../utils/spread-props'
 
-export class Collapsible extends Component<collapsible.Context, collapsible.Api> {
-  static instances: Map<string, Collapsible> = new Map()
+export class ZagCollapsible extends Component<collapsible.Props, collapsible.Api> {
+  static instances: Map<string, ZagCollapsible> = new Map()
 
   static getInstance(id: string) {
-    return Collapsible.instances.get(id)
+    return ZagCollapsible.instances.get(id)
   }
 
-  initService(context: collapsible.Context) {
-    Collapsible.instances.set(context.id, this)
+  initMachine(context: collapsible.Props) {
+    ZagCollapsible.instances.set(context.id, this)
 
-    return collapsible.machine({
+    return new VanillaMachine(collapsible.machine, {
+      ...context,
       disabled: this.rootEl.hasAttribute('disabled') || this.rootEl.hasAttribute('data-disabled'),
       dir: this.rootEl.getAttribute('data-dir') === 'rtl' ? 'rtl' : 'ltr',
       open: this.rootEl.hasAttribute('data-open'),
@@ -29,12 +31,11 @@ export class Collapsible extends Component<collapsible.Context, collapsible.Api>
         const event = new CustomEvent('onExitComplete')
         this.rootEl.dispatchEvent(event)
       },
-      ...context,
     })
   }
 
   initApi() {
-    return collapsible.connect(this.service.state, this.service.send, normalizeProps)
+    return collapsible.connect(this.machine.service, normalizeProps)
   }
 
   render() {
@@ -72,7 +73,7 @@ export class Collapsible extends Component<collapsible.Context, collapsible.Api>
 
 export function collapsibleInit() {
   queryAll(document, '[data-part="collapsible-trigger"]').forEach((rootEl) => {
-    const collapsible = new Collapsible(rootEl, {
+    const collapsible = new ZagCollapsible(rootEl, {
       id: rootEl.id || nanoid(),
     })
     collapsible.init()
@@ -80,6 +81,6 @@ export function collapsibleInit() {
 }
 
 if (typeof window !== 'undefined') {
-  window.Collapsible = Collapsible
+  window.ZagCollapsible = ZagCollapsible
   window.collapsibleInit = collapsibleInit
 }

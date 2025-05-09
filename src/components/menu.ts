@@ -1,18 +1,21 @@
 import * as menu from '@zag-js/menu'
 import { nanoid } from 'nanoid'
 import { Component } from '../utils/component'
+import { VanillaMachine } from '../utils/machine'
 import { normalizeProps } from '../utils/normalize-props'
 import { spreadProps } from '../utils/spread-props'
 
-export class Menu extends Component<menu.Context, menu.Api> {
+export class ZagMenu extends Component<menu.Props, menu.Api> {
   private checkedState: Map<string, boolean> = new Map()
 
-  initService(context: menu.Context) {
-    return menu.machine(context)
+  initMachine(context: menu.Props) {
+    return new VanillaMachine(menu.machine, {
+      ...context,
+    })
   }
 
   initApi() {
-    return menu.connect(this.service.state, this.service.send, normalizeProps)
+    return menu.connect(this.machine.service, normalizeProps)
   }
 
   render() {
@@ -113,7 +116,7 @@ export class Menu extends Component<menu.Context, menu.Api> {
 
 export function menuInit() {
   document.querySelectorAll<HTMLElement>('[data-part="menu-trigger"]').forEach((targetEl) => {
-    const menu = new Menu(targetEl, {
+    const menu = new ZagMenu(targetEl, {
       id: nanoid(),
     })
     menu.init()
@@ -121,6 +124,6 @@ export function menuInit() {
 }
 
 if (typeof window !== 'undefined') {
-  window.Menu = Menu
+  window.ZagMenu = ZagMenu
   window.menuInit = menuInit
 }

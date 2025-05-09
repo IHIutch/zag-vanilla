@@ -1,7 +1,8 @@
-import * as zagCombobox from '@zag-js/combobox'
+import * as combobox from '@zag-js/combobox'
 import { query, queryAll } from '@zag-js/dom-query'
 import { nanoid } from 'nanoid'
 import { Component } from '../utils/component'
+import { VanillaMachine } from '../utils/machine'
 import { normalizeProps } from '../utils/normalize-props'
 import { spreadProps } from '../utils/spread-props'
 
@@ -12,23 +13,23 @@ const COMBOBOX_LABEL_SELECTOR = '[data-part="combobox-label"]'
 const COMBOBOX_CONTENT_SELECTOR = '[data-part="combobox-content"]'
 const COMBOBOX_ITEM_SELECTOR = '[data-part="combobox-item"]'
 
-export class Combobox extends Component<zagCombobox.Context, zagCombobox.Api> {
-  static instances: Map<string, Combobox> = new Map()
+export class ZagCombobox extends Component<combobox.Props, combobox.Api> {
+  static instances: Map<string, ZagCombobox> = new Map()
 
   static getInstance(id: string) {
-    return Combobox.instances.get(id)
+    return ZagCombobox.instances.get(id)
   }
 
-  initService(context: zagCombobox.Context) {
-    Combobox.instances.set(context.id, this)
+  initMachine(context: combobox.Props) {
+    ZagCombobox.instances.set(context.id, this)
 
-    return zagCombobox.machine({
+    return new VanillaMachine(combobox.machine, {
       ...context,
     })
   }
 
   initApi() {
-    return zagCombobox.connect(this.service.state, this.service.send, normalizeProps)
+    return combobox.connect(this.machine.service, normalizeProps)
   }
 
   render() {
@@ -99,28 +100,14 @@ export class Combobox extends Component<zagCombobox.Context, zagCombobox.Api> {
 
 export function comboboxInit() {
   queryAll(document, COMBOBOX_ROOT_SELECTOR).forEach((rootEl) => {
-    const items = queryAll(rootEl, COMBOBOX_ITEM_SELECTOR).map(itemEl => ({
-      value: itemEl.getAttribute('data-value') || '',
-      label: (itemEl.textContent || '').trim(),
-      isItemDisabled: itemEl.hasAttribute('disabled') || itemEl.hasAttribute('data-disabled'),
-    }))
-
-    const collection = zagCombobox.collection({
-      items,
-      itemToValue: item => item.value,
-      itemToString: item => item.label,
-      isItemDisabled: item => item.isItemDisabled,
-    })
-
-    const combobox = new Combobox(rootEl, {
+    const combobox = new ZagCombobox(rootEl, {
       id: nanoid(),
-      collection,
     })
     combobox.init()
   })
 }
 
 if (typeof window !== 'undefined') {
-  window.Combobox = Combobox
+  window.ZagCombobox = ZagCombobox
   window.comboboxInit = comboboxInit
 }

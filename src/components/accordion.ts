@@ -1,19 +1,20 @@
 import * as accordion from '@zag-js/accordion'
 import { nanoid } from 'nanoid'
 import { Component } from '../utils/component'
+import { VanillaMachine } from '../utils/machine'
 import { normalizeProps } from '../utils/normalize-props'
 import { spreadProps } from '../utils/spread-props'
 
-export class Accordion extends Component<accordion.Context, accordion.Api> {
-  initService(context: accordion.Context) {
-    return accordion.machine({
-      multiple: this.rootEl.hasAttribute('data-multiple'),
+export class ZagAccordion extends Component<accordion.Props, accordion.Api> {
+  initMachine(context: accordion.Props) {
+    return new VanillaMachine(accordion.machine, {
       ...context,
+      multiple: this.rootEl.hasAttribute('data-multiple'),
     })
   }
 
   initApi() {
-    return accordion.connect(this.service.state, this.service.send, normalizeProps)
+    return accordion.connect(this.machine.service, normalizeProps)
   }
 
   render() {
@@ -51,7 +52,7 @@ export class Accordion extends Component<accordion.Context, accordion.Api> {
 
 export function accordionInit() {
   document.querySelectorAll<HTMLElement>('[data-part="accordion-root"]').forEach((rootEl) => {
-    const accordion = new Accordion(rootEl, {
+    const accordion = new ZagAccordion(rootEl, {
       id: nanoid(),
     })
     accordion.init()
@@ -59,6 +60,6 @@ export function accordionInit() {
 }
 
 if (typeof window !== 'undefined') {
-  window.Accordion = Accordion
+  window.ZagAccordion = ZagAccordion
   window.accordionInit = accordionInit
 }

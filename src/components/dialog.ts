@@ -1,21 +1,22 @@
 import * as dialog from '@zag-js/dialog'
 import { nanoid } from 'nanoid'
 import { Component } from '../utils/component'
+import { VanillaMachine } from '../utils/machine'
 import { normalizeProps } from '../utils/normalize-props'
 import { spreadProps } from '../utils/spread-props'
 
-export class Dialog extends Component<dialog.Context, dialog.Api> {
-  initService(context: dialog.Context) {
-    return dialog.machine({
+export class ZagDialog extends Component<dialog.Props, dialog.Api> {
+  initMachine(context: dialog.Props) {
+    return new VanillaMachine(dialog.machine, {
+      ...context,
       role: this.content.getAttribute('role') === 'alertdialog' ? 'alertdialog' : 'dialog',
       closeOnEscape: !this.content.hasAttribute('data-static'),
       closeOnInteractOutside: !this.content.hasAttribute('data-static'),
-      ...context,
     })
   }
 
   initApi() {
-    return dialog.connect(this.service.state, this.service.send, normalizeProps)
+    return dialog.connect(this.machine.service, normalizeProps)
   }
 
   render() {
@@ -102,7 +103,7 @@ export class Dialog extends Component<dialog.Context, dialog.Api> {
 
 export function dialogInit() {
   document.querySelectorAll<HTMLElement>('[data-part="dialog-trigger"]').forEach((targetEl) => {
-    const dialog = new Dialog(targetEl, {
+    const dialog = new ZagDialog(targetEl, {
       id: nanoid(),
     })
     dialog.init()
@@ -110,6 +111,6 @@ export function dialogInit() {
 }
 
 if (typeof window !== 'undefined') {
-  window.Dialog = Dialog
+  window.ZagDialog = ZagDialog
   window.dialogInit = dialogInit
 }

@@ -1,12 +1,13 @@
 import * as checkbox from '@zag-js/checkbox'
 import { nanoid } from 'nanoid'
 import { Component } from '../utils/component'
+import { VanillaMachine } from '../utils/machine'
 import { normalizeProps } from '../utils/normalize-props'
 import { spreadProps } from '../utils/spread-props'
 
-export class Checkbox extends Component<checkbox.Context, checkbox.Api> {
-  initService(context: checkbox.Context) {
-    return checkbox.machine({
+export class ZagCheckbox extends Component<checkbox.Props, checkbox.Api> {
+  initMachine(context: checkbox.Props) {
+    return new VanillaMachine(checkbox.machine, {
       name: this.input.getAttribute('name') || undefined,
       checked: this.input.hasAttribute('indeterminate') ? 'indeterminate' : this.input.checked,
       disabled: this.input.disabled,
@@ -15,7 +16,7 @@ export class Checkbox extends Component<checkbox.Context, checkbox.Api> {
   }
 
   initApi() {
-    return checkbox.connect(this.service.state, this.service.send, normalizeProps)
+    return checkbox.connect(this.machine.service, normalizeProps)
   }
 
   render() {
@@ -49,7 +50,7 @@ export class Checkbox extends Component<checkbox.Context, checkbox.Api> {
 
 export function checkboxInit() {
   document.querySelectorAll<HTMLElement>('[data-part="checkbox-root"]').forEach((rootEl) => {
-    const checkbox = new Checkbox(rootEl, {
+    const checkbox = new ZagCheckbox(rootEl, {
       id: nanoid(),
     })
     checkbox.init()
@@ -57,6 +58,6 @@ export function checkboxInit() {
 }
 
 if (typeof window !== 'undefined') {
-  window.Checkbox = Checkbox
+  window.ZagCheckbox = ZagCheckbox
   window.checkboxInit = checkboxInit
 }

@@ -18,7 +18,7 @@ export function spreadProps(node: HTMLElement, attrs: Attrs): () => void {
   }
 
   const onEvents = (attr: string) => attr.startsWith('on')
-  const others = (attr: string) => !attr.startsWith('on') && !attr.startsWith('data-part')
+  const others = (attr: string) => !attr.startsWith('on') && !attr.startsWith('data-part') // Manually adding "!attr.startsWith('data-part')" here to avoid rewriting data-part on vanilla components. We use data-part to identify component anatomy in the DOM. This is different than the example: https://github.com/chakra-ui/zag/blob/main/examples/vanilla-ts/src/lib/spread-props.ts#L21
 
   const setup = (attr: string) => addEvt(attr.substring(2), attrs[attr])
   const teardown = (attr: string) => remEvt(attr.substring(2), attrs[attr])

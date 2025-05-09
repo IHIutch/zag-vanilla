@@ -1,22 +1,25 @@
 import * as splitter from '@zag-js/splitter'
 import { nanoid } from 'nanoid'
 import { Component } from '../utils/component'
+import { VanillaMachine } from '../utils/machine'
 import { normalizeProps } from '../utils/normalize-props'
 import { spreadProps } from '../utils/spread-props'
 
-export class Splitter extends Component<splitter.Context, splitter.Api> {
-  initService(context: splitter.Context) {
-    return splitter.machine({
-      size: this.panels.map(panelEl => ({
-        id: panelEl.getAttribute('data-value') || '',
+export class ZagSplitter extends Component<splitter.Props, splitter.Api> {
+  initMachine(context: splitter.Props) {
+    return new VanillaMachine(splitter.machine, {
+      ...context,
+      size: this.panels.map(panelEl => Number(panelEl.getAttribute('data-size') || 50)),
+      orientation: this.rootEl.getAttribute('data-orientation') === 'vertical' ? 'vertical' : 'horizontal',
+      panels: this.panels.map(panelEl => ({
+        id: this.rootEl.getAttribute('data-value') || '',
         size: Number(panelEl.getAttribute('data-size') || 50),
       })),
-      ...context,
     })
   }
 
   initApi() {
-    return splitter.connect(this.service.state, this.service.send, normalizeProps)
+    return splitter.connect(this.machine.service, normalizeProps)
   }
 
   render() {
@@ -57,15 +60,18 @@ export class Splitter extends Component<splitter.Context, splitter.Api> {
 
 export function splitterInit() {
   document.querySelectorAll<HTMLElement>('[data-part="splitter-root"]').forEach((rootEl) => {
-    const splitter = new Splitter(rootEl, {
+    const panelEls = Array.from(rootEl.querySelectorAll<HTMLElement>('[data-part="splitter-panel"]'))
+    const splitter = new ZagSplitter(rootEl, {
       id: nanoid(),
-      orientation: rootEl.getAttribute('data-orientation') === 'vertical' ? 'vertical' : 'horizontal',
+      panels: panelEls.map(panelEl => ({
+        id: panelEl.getAttribute('data-value') || '',
+      })),
     })
     splitter.init()
   })
 }
 
 if (typeof window !== 'undefined') {
-  window.Splitter = Splitter
+  window.ZagSplitter = ZagSplitter
   window.splitterInit = splitterInit
 }

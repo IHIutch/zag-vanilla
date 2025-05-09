@@ -1,44 +1,44 @@
-import type { Accordion } from './components/accordion'
-import type { Avatar } from './components/avatar'
-import type { Carousel } from './components/carousel'
-import type { Checkbox } from './components/checkbox'
-import type { Clipboard } from './components/clipboard'
-import type { Collapsible } from './components/collapsible'
-import type { Combobox } from './components/combobox'
-import type { Dialog } from './components/dialog'
-import type { Menu } from './components/menu'
-import type { Splitter } from './components/splitter'
+import type { ZagAccordion } from './components/accordion'
+import type { ZagAvatar } from './components/avatar'
+import type { ZagCarousel } from './components/carousel'
+import type { ZagCheckbox } from './components/checkbox'
+import type { ZagClipboard } from './components/clipboard'
+import type { ZagCollapsible } from './components/collapsible'
+import type { ZagCombobox } from './components/combobox'
+import type { ZagDialog } from './components/dialog'
+import type { ZagMenu } from './components/menu'
+import type { ZagSplitter } from './components/splitter'
 
 declare global {
   interface Window {
-    Accordion: typeof Accordion
+    ZagAccordion: typeof ZagAccordion
     accordionInit: () => void
     //
-    Avatar: typeof Avatar
+    ZagAvatar: typeof ZagAvatar
     avatarInit: () => void
     //
-    Carousel: typeof Carousel
+    ZagCarousel: typeof ZagCarousel
     carouselInit: () => void
     //
-    Checkbox: typeof Checkbox
+    ZagCheckbox: typeof ZagCheckbox
     checkboxInit: () => void
     //
-    Clipboard: typeof Clipboard
+    ZagClipboard: typeof ZagClipboard
     clipboardInit: () => void
     //
-    Collapsible: typeof Collapsible
+    ZagCollapsible: typeof ZagCollapsible
     collapsibleInit: () => void
     //
-    Combobox: typeof Combobox
+    ZagCombobox: typeof ZagCombobox
     comboboxInit: () => void
     //
-    Dialog: typeof Dialog
+    ZagDialog: typeof ZagDialog
     dialogInit: () => void
     //
-    Menu: typeof Menu
+    ZagMenu: typeof ZagMenu
     menuInit: () => void
     //
-    Splitter: typeof Splitter
+    ZagSplitter: typeof ZagSplitter
     splitterInit: () => void
   }
 }
