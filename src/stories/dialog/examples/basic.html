@@ -1,4 +1,6 @@
 <div>
+  <button id="hello">test</button>
+
   <button
     data-part="dialog-trigger"
     data-target="modal"
@@ -58,3 +60,18 @@
     </div>
   </div>
 </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // const toggle = document.getElementById('collapsible:blah:trigger')
+    const instance = ZagDialog.getInstance('blah')
+
+    // toggle.addEventListener('onOpenChange', (event) => {
+    //   console.log('onOpenChange', event)
+    // })
+
+    document.getElementById('hello').addEventListener('click', () => {
+      instance.toggle()
+    })
+  })
+</script>

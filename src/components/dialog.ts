@@ -5,7 +5,19 @@ import { normalizeProps } from '../utils/normalize-props'
 import { spreadProps } from '../utils/spread-props'
 
 export class ZagDialog extends Component<dialog.Props, dialog.Api> {
+  static instances: Map<string, ZagDialog> = new Map()
+
+  static getInstance(id: string) {
+    const instance = ZagDialog.instances.get(id)
+    if (!instance) {
+      console.error(`ZagDialog instance with id "${id}" not found`)
+    }
+    return instance
+  }
+
   initMachine(context: dialog.Props) {
+    ZagDialog.instances.set(context.id, this)
+
     return new VanillaMachine(dialog.machine, {
       ...context,
       role: this.content.getAttribute('role') === 'alertdialog' ? 'alertdialog' : 'dialog',
@@ -97,6 +109,18 @@ export class ZagDialog extends Component<dialog.Props, dialog.Api> {
 
   private renderCloseTrigger(closeTriggerEl: HTMLButtonElement) {
     spreadProps(closeTriggerEl, this.api.getCloseTriggerProps())
+  }
+
+  show() {
+    this.api.setOpen(true)
+  }
+
+  hide() {
+    this.api.setOpen(false)
+  }
+
+  toggle() {
+    this.api.setOpen(!this.api.open)
   }
 }
 
