@@ -7,6 +7,7 @@ import type { ZagCollapsible } from './components/collapsible'
 import type { ZagCombobox } from './components/combobox'
 import type { ZagDialog } from './components/dialog'
 import type { ZagMenu } from './components/menu'
+import { ZagPinInput } from './components/pin-input'
 import type { ZagSplitter } from './components/splitter'
 
 declare global {
@@ -40,5 +41,9 @@ declare global {
     //
     ZagSplitter: typeof ZagSplitter
     splitterInit: () => void
+    //
+    ZagPinInput: typeof ZagPinInput
+    pinInputInit: () => void
+    //
   }
 }

@@ -59,6 +59,9 @@ importers:
       '@zag-js/menu':
         specifier: ^1.12.0
         version: 1.12.0
+      '@zag-js/pin-input':
+        specifier: ^1.12.0
+        version: 1.12.0
       '@zag-js/splitter':
         specifier: ^1.12.0
         version: 1.12.0
@@ -1400,6 +1403,9 @@ packages:
 
   '@zag-js/menu@1.12.0':
     resolution: {integrity: sha512-ciKCeQ1heLGt4RcyhB5f9GQB7CE1rP9Zfwp5oHX9FC5rq4nyneI0qhXEYYklE0P9z7+Z6EAH8FyvLORj5j/SpA==}
+
+  '@zag-js/pin-input@1.12.0':
+    resolution: {integrity: sha512-8291cewBFGtUwX1iAObmNUvnp5/31iAYuWIn87vejqG+fVNxPnV9bUYN0nKAXhQTEZo03N/90FxbX8chZSgWtA==}
 
   '@zag-js/popper@1.12.0':
     resolution: {integrity: sha512-YVdQHdYT32OtIeYmOBpdhhDoZa1aFQA5PrhSMAX9gtEnDIWg3m4bwdwC0Fs7G++zguHjgJ6ve1/QxTs6lHnC7Q==}
@@ -4540,6 +4546,14 @@ snapshots:
       '@zag-js/dom-query': 1.12.0
       '@zag-js/popper': 1.12.0
       '@zag-js/rect-utils': 1.12.0
+      '@zag-js/types': 1.12.0
+      '@zag-js/utils': 1.12.0
+
+  '@zag-js/pin-input@1.12.0':
+    dependencies:
+      '@zag-js/anatomy': 1.12.0
+      '@zag-js/core': 1.12.0
+      '@zag-js/dom-query': 1.12.0
       '@zag-js/types': 1.12.0
       '@zag-js/utils': 1.12.0
 
