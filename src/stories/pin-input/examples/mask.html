@@ -1,5 +1,5 @@
 <div>
-  <div data-part="pin-input-root" data-id="test">
+  <div data-part="pin-input-root" data-id="test" data-mask>
     <input data-part="pin-input" class="size-10 text-center border border-solid border-gray-300 rounded" />
     <input data-part="pin-input" class="size-10 text-center border border-solid border-gray-300 rounded"/>
     <input data-part="pin-input" class="size-10 text-center border border-solid border-gray-300 rounded"/>
@@ -9,12 +9,11 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    // const toggle = document.getElementById('collapsible:blah:trigger')
     const instance = ZagPinInput.getInstance('test')
 
-    // toggle.addEventListener('onOpenChange', (event) => {
-    //   console.log('onOpenChange', event)
-    // })
+    instance.getRoot().addEventListener('onValueChange', (event) => {
+      console.log('onValueChange', event.detail)
+    })
 
     document.getElementById('clear').addEventListener('click', () => {
       instance.clearValue()
